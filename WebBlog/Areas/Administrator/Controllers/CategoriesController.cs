@@ -16,7 +16,6 @@ namespace WebBlog.Areas.Administrator.Controllers
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
-        private readonly WebBlogDbContext _context;
 
         public CategoriesController(ICategoryService categoryService)
         {
@@ -38,8 +37,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .SingleOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryService.GetByIdAsync(id.Value);
             if (category == null)
             {
                 return NotFound();
@@ -173,7 +171,7 @@ namespace WebBlog.Areas.Administrator.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _categoryService.CategoryExists(id);
         }
     }
 }

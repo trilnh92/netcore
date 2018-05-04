@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<WebBlog.Database.Models.Article>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Recycle";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
 <div class="mws-panel grid_8 mws-collapsible">
     <div class="mws-panel-header admin-header">
-        <span><i class="icon-table"></i>Tất cả bài viết</span>
+        <span><i class="icon-table"></i>Tất cả bài viết đã xóa</span>
     </div>
     <div class="mws-panel-body no-padding ">
         <div class="dataTables_wrapper">
@@ -72,12 +72,12 @@
                         </td>
                         <td>
                             <span class="btn-group">
-                                <a class="btn btn-small" asp-area="Administrator" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.ArticleId">
-                                    <i title="Cập nhật bài viết" class="icol-text-signature"></i>
+                                <a class="btn btn-small" asp-area="Administrator" asp-controller="Articles" asp-action="Restore" asp-route-id="@item.ArticleId">
+                                    <i title="Phục hồi bài viết" class="icol-arrow-undo"></i>
                                 </a>
                                 <a class="btn btn-small"
-                                   asp-area="Administrator" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.ArticleId">
-                                    <i title="Xóa bài viết" class="icol-cancel"></i>
+                                   asp-area="Administrator" asp-controller="Articles" asp-action="DeleteForever" asp-route-id="@item.ArticleId">
+                                    <i title="Xóa vĩnh viễn bài viết" class="icol-cancel"></i>
                                 </a>
                             </span>
                         </td>
@@ -91,7 +91,7 @@
 </div>
 <script type="text/javascript">
     $(".active_article").addClass("active");
-    $(".article-all").attr("style", "color:#bc4343!important");
+    $(".article-recycle").attr("style", "color:#bc4343!important");
     $(".active_article .ulRightMenu").attr("style", "display: block;");
 </script>
 

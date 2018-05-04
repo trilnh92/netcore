@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
@@ -50,6 +51,11 @@ namespace WebBlog.Services.Services
         public async Task DeleteAsync(Category category)
         {
             await _unitOfWork.CategoryRepository.DeleteAsync(category);
+        }
+
+        public bool CategoryExists(int id)
+        {
+            return _unitOfWork.CategoryRepository.Query.Any(x => x.CategoryId == id);
         }
     }
 }

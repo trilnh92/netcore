@@ -8,6 +8,7 @@ namespace WebBlog.Services.IServices
 {
     public interface ICategoryService
     {
+        bool CategoryExists(int id);
         IEnumerable<Category> GetAllByLanguage(string language);
         
         Task<Category> GetByIdAsync(int id);

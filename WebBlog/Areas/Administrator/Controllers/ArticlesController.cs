@@ -17,7 +17,6 @@ namespace WebBlog.Areas.Administrator.Controllers
     {
         private readonly IArticleService _articleService;
         private readonly ICategoryService _categoryService;
-        private readonly WebBlogDbContext _context;
 
         public ArticlesController(IArticleService articleService, ICategoryService categoryService)
         {
@@ -40,8 +39,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Articles
-                .SingleOrDefaultAsync(m => m.ArticleId == id);
+            var article = await _articleService.GetByIdAsync(id.Value);
             if (article == null)
             {
                 return NotFound();
@@ -170,9 +168,35 @@ namespace WebBlog.Areas.Administrator.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Administrator/Articles/Recycle
+        public async Task<IActionResult> Recycle()
+        {
+            var result = await _articleService.GetAllRemovedAsync();
+            return View(result);
+        }
+
+        // POST: Administrator/Articles/Restore/5
+        [HttpGet, ActionName("Restore")]        
+        public async Task<IActionResult> Restore(int id)
+        {
+            var article = await _articleService.GetByIdAsync(id);
+            article.IsDeleted = false;
+            await _articleService.UpdateAsync(article);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Administrator/Articles/Delete/5
+        [HttpGet, ActionName("DeleteForever")]        
+        public async Task<IActionResult> DeleteForever(int id)
+        {
+            var article = await _articleService.GetByIdAsync(id);            
+            await _articleService.DeleteAsync(article);
+            return RedirectToAction(nameof(Recycle));
+        }
+
         private bool ArticleExists(int id)
         {
-            return _context.Articles.Any(e => e.ArticleId == id);
+            return _articleService.ArticleExists(id);
         }
     }
 }
