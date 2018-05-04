@@ -1,0 +1,9 @@
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.deps.json
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.csproj.CoreCompileInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.AssemblyInfoInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.AssemblyInfo.cs
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.csprojResolveAssemblyReference.cache

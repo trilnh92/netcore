@@ -1,0 +1,74 @@
+﻿@model WebBlog.Database.Models.Article
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Viết bài</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Danh mục</label>
+                <select class="form-control" asp-for="CategoryArticleId" asp-items="ViewBag.CategoryList">
+                    <option value="-1">Không có danh mục</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tựa bài viết</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BriefContent" class="control-label">Nội dung tóm tắt</label>
+                <textarea asp-for="BriefContent" class="form-control" rows="8">
+                </textarea>
+                <span asp-validation-for="BriefContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullContent" class="control-label">Nội dung</label>
+                <textarea id="richText" class="inputArea" style="height: 500px" cols="" rows="40" name="FullContent" asp-for="FullContent">
+                </textarea>
+                <span asp-validation-for="FullContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Hình đại diện</label>
+                <input asp-for="Image" class="form-control" type="file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Source" class="control-label">Nguồn (nếu có)</label>
+                <input asp-for="Source" class="form-control" />
+                <span asp-validation-for="Source" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsVisible" value="true" /> Có hiển thị
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsHot" /> Bài đang được quan tâm
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

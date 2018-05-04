@@ -1,0 +1,56 @@
+﻿@model WebBlog.Database.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bạn có chắc chắn sẽ xóa danh mục này không?</h3>
+<div>
+    <h4>Danh mục</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Danh mục cha
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParentName)
+        </dd>
+        <dt>
+            Tên
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>        
+        <dt>
+            Ngôn ngữ
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+        <dt>
+            Miêu tả
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>        
+        <dt>
+            Có danh mục con
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HasChildren)
+        </dd>        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoryId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

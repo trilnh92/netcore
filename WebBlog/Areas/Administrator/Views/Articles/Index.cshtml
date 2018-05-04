@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebBlog.Database.Models.Article>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mws-panel grid_8 mws-collapsible">
+    <div class="mws-panel-header admin-header">
+        <span><i class="icon-table"></i>Tất cả bài viết</span>
+    </div>
+    <div class="mws-panel-body no-padding ">
+        <div class="dataTables_wrapper">
+            <div class="filter">
+                Tìm kiếm:
+
+                <input type="text" name="keyword" id="" />
+                <button class="btn btn-primary" onclick="submit();">
+                    <i class="icon-search"></i>
+                </button>
+
+            </div>
+
+            <table class="mws-table mws-datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            Tựa đề
+                        </th>
+                        <th>
+                            Danh mục
+                        </th>
+                        <th>
+                            Tác giả
+                        </th>
+                        <th>
+                            Bài viết hot
+                        </th>
+                        <th>
+                            Ngày tạo
+                        </th>
+                        <th>
+                            Ngày cập nhật
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 150px">
+                            <a asp-area="Administrator" asp-controller="Articles" asp-action="Detail" asp-route-id="@item.ArticleId" target="_blank">@item.Title</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryArticleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td>
+                            @(item.IsHot ? System.Net.WebUtility.HtmlDecode("&#x2714;") : System.Net.WebUtility.HtmlDecode("&#x2718;"))
+                        </td>
+                        <td>
+                            @item.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss tt")
+                        </td>
+                        <td>
+                            @if (item.UpdatedDate.HasValue)
+                            {
+                                @item.UpdatedDate.Value.ToString("dd/MM/yyyy hh:mm:ss tt")
+                            }
+                        </td>
+                        <td>
+                            <span class="btn-group">
+                                <a class="btn btn-small" asp-area="Administrator" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.ArticleId">
+                                    <i title="Cập nhật danh mục" class="icol-text-signature"></i>
+                                </a>
+                                <a class="btn btn-small"
+                                   asp-area="Administrator" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.ArticleId">
+                                    <i title="Xóa danh mục" class="icol-cancel"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".active_article").addClass("active");
+    $(".article-all").attr("style", "color:#bc4343!important");
+    $(".active_article .ulRightMenu").attr("style", "display: block;");
+</script>
+

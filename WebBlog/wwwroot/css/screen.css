@@ -1,0 +1,72 @@
+/*
+ * @author: YANG NGUYEN
+ * @copyright: 2012
+*/
+
+*:focus{
+    outline: none;
+}
+textarea{
+    resize: none;
+}
+
+.colOne{
+    text-align: left!important;
+    width: 20%;
+}
+
+.inputText{
+    width: 93%;
+    height: 25px;
+    padding: 2px 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+
+.inputText_Special{
+    width: 100px;
+    height: 25px;
+    padding: 2px 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+
+.inputSelect{
+    width: 80%;
+    height: 30px;
+    padding: 2px 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+.inputArea{
+    width: 93%;
+    padding: 2px 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+
+.mws-datatable span{
+    padding-right: 10px;
+    display: inline-block;
+    text-align: right;
+}
+.filter{
+    position: relative;
+}
+.Add{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Add2{    
+    font-weight: bold;
+    cursor: pointer;
+    text-align: right;
+}
+
+.ulRightMenu .current a{
+    font-weight: bold;
+    color: #339CDD!important;
+}

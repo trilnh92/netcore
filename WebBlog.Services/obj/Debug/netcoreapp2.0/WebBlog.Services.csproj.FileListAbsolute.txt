@@ -1,0 +1,14 @@
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.deps.json
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csproj.CoreCompileInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.AssemblyInfoInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.AssemblyInfo.cs
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csproj.CopyComplete
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Database.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Database.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csprojResolveAssemblyReference.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.pdb

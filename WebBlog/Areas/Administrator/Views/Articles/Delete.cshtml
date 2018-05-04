@@ -1,0 +1,41 @@
+﻿@model WebBlog.Database.Models.Article
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bạn có chắc sẽ xóa bài viết này không?</h3>
+<div>
+    <h4>Bài viết</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Tựa bài viết
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            Nội dung
+        </dt>
+        <dd>
+            <textarea id="richText" class="inputArea" style="height: 500px" cols="" rows="40" name="FullContent" asp-for="FullContent">
+                </textarea>
+        </dd>
+        
+        <dt>
+            Tác giả
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ArticleId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

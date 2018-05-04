@@ -1,0 +1,108 @@
+﻿@model IEnumerable<WebBlog.Database.Models.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDeleted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeletedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeletedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsApproved)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ext)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleId)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ext)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CommentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CommentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

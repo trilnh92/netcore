@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-WebBlog-FD4909E6-702A-4D5F-911F-096B40749267</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Administrator\Contents\**" />
+    <Content Remove="Areas\Administrator\Contents\**" />
+    <EmbeddedResource Remove="Areas\Administrator\Contents\**" />
+    <None Remove="Areas\Administrator\Contents\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Areas\Client\Controllers\" />
+    <Folder Include="Areas\Client\Data\" />
+    <Folder Include="Areas\Client\Models\" />
+    <Folder Include="Areas\Client\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebBlog.Common\WebBlog.Common.csproj" />
+    <ProjectReference Include="..\WebBlog.Database\WebBlog.Database.csproj" />
+    <ProjectReference Include="..\WebBlog.Services\WebBlog.Services.csproj" />
+  </ItemGroup>
+
+</Project>

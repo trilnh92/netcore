@@ -1,0 +1,166 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WebBlog.Database.Models
+@using WebBlog.Views.Manage
+
+@inject SignInManager<WebBlog.Database.Models.ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+
+    <link href="~/css/fonts/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/css/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/css/icons/icol16.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/tiny_mce/tiny_mce.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        tinyMCE.init({
+            // General options
+            mode: "exact",
+            theme: "advanced",
+            elements: 'richText, richText1, richText2, richText3',
+            plugins: "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,netadvimage",
+
+            // Theme options
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,netadvimage,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            plugin_preview_width: "100%",
+            width: 800,
+
+            // Skin options
+            skin: "o2k7",
+            skin_variant: "silver",
+
+            // Example content CSS (should be your site CSS)
+            // content_css: "css/example.css",
+
+            // Drop lists for link/image/media/template dialogs
+            template_external_list_url: "js/template_list.js",
+            external_link_list_url: "js/link_list.js",
+            external_image_list_url: "js/image_list.js",
+            media_external_list_url: "js/media_list.js",
+
+            // Replace values for the template plugin
+            template_replace_values: {
+                username: "Some User",
+                staffid: "991234"
+            }
+        });
+
+        $(document).ready(function () {
+            $("#multiSelectCheckbox").click(function () {
+                var multiSelect = document.getElementById("multiSelectCheckbox");
+                var multiDelete = document.getElementsByName("multiDelete");
+                for (var i = 0; i < multiDelete.length; i++) {
+                    multiDelete[i].checked = multiSelect.checked;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="mws-header" class="clearfix">
+        <div id="mws-logo-container">
+            <div id="mws-logo-wrap">
+            </div>
+        </div>
+        <div id="mws-user-tools" class="clearfix">
+            <div id="mws-home">
+                <a href="/Home" target="_blank"><i class="icon-home"></i>Home</a>
+            </div>
+            <div id="mws-language">
+                <a>
+                    <i class="icon-flag"></i>
+                </a>
+            </div>
+            <div id="mws-user-message" class="mws-dropdown-menu">
+                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger">
+                    <i class="icon-envelope">
+                    </i>
+                </a><span class="mws-dropdown-notif">2</span>
+                <div class="mws-dropdown-box">
+                    <div class="mws-dropdown-content">
+                        <ul class="mws-messages">
+                            <li class="unread">
+                                <a href="#">
+                                    <span class="sender">Tài Hoàng</span> <span class="message">
+
+                                    </span><span class="time">
+                                        30-04-2018
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="mws-dropdown-viewall">
+                            <a href="#">Vào hộp thư</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mws-user-info" class="mws-inset">
+                <div id="mws-user-photo">
+                    <img src="~/css/core/admin_user.png" alt="User Photo" />
+                </div>
+                <div id="mws-user-functions">
+                    <div id="mws-username">
+                        Welcome @UserManager.GetUserName(User)!
+                    </div>
+                    <ul>
+                        <li><a asp-area="" asp-controller="Manage" asp-action="Index">Profile</a></li>
+                        <li><a asp-area="" asp-controller="Manage" asp-action="ChangePassword">Password</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mws-wrapper">
+        <div id="mws-sidebar-stitch">
+        </div>
+        <div id="mws-sidebar-bg">
+        </div>
+        <div id="mws-sidebar">
+            <div id="mws-searchbox" class="mws-inset">
+                <form action="">
+                    <input type="text" class="mws-search-input" placeholder="Search..." />
+                    <button type="submit" class="mws-search-submit">
+                        <i class="icon-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div id="mws-navigation">
+                @{Html.RenderPartial("_Admin.WebBlog.cshtml");}
+            </div>
+        </div>
+        <div id="mws-container" class="clearfix">
+            <div class="container">
+                @RenderBody()
+            </div>
+            <div id="mws-footer">
+                Copyright &copy; 2018 by WebBlog. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
