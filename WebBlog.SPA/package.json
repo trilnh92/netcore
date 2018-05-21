@@ -1,0 +1,31 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "react+webpack+typescript",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack-cli",
+    "watch": "./node_modules/.bin/webpack-cli --watch",
+    "start": "webpack-dev-server"
+  },
+  "author": "taihoang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erickkkt/netcore.git"
+  },
+  "dependencies": {
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "@types/webpack-env": "^1.13.6",
+    "bootstrap": "^4.1.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.0.0",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^2.8.3"
+  }
+}

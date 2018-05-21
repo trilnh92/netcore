@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-WebBlog-FD4909E6-702A-4D5F-911F-096B40749267</UserSecretsId>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administrator\Models\" />
-    <Folder Include="Areas\Client\Controllers\" />
     <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Client\Models\" />
     <Folder Include="Areas\Client\Views\" />

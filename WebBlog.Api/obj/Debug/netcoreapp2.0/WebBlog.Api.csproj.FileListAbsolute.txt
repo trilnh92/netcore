@@ -1,0 +1,11 @@
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\bin\Debug\netcoreapp2.0\WebBlog.Api.deps.json
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\bin\Debug\netcoreapp2.0\WebBlog.Api.runtimeconfig.json
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\bin\Debug\netcoreapp2.0\WebBlog.Api.runtimeconfig.dev.json
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\bin\Debug\netcoreapp2.0\WebBlog.Api.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\bin\Debug\netcoreapp2.0\WebBlog.Api.pdb
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.csprojResolveAssemblyReference.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.csproj.CoreCompileInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.AssemblyInfoInputs.cache
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.AssemblyInfo.cs
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.dll
+C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Api\obj\Debug\netcoreapp2.0\WebBlog.Api.pdb
