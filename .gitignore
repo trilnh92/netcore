@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs/WebBlog/v15/Server/sqlite3/storage.ide-shm
+/.vs/WebBlog/v15/Server/sqlite3/storage.ide-wal
+/WebBlog.Api/bin/Debug/netcoreapp2.0/appsettings.json
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Common.dll
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Common.pdb
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Database.dll
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Database.pdb
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Services.dll
+/WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Services.pdb
+/WebBlog.Api/obj/Debug/netcoreapp2.0/WebBlog.Api.csproj.CopyComplete
