@@ -12,3 +12,4 @@
 /WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Services.dll
 /WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Services.pdb
 /WebBlog.Api/obj/Debug/netcoreapp2.0/WebBlog.Api.csproj.CopyComplete
+/WebBlog.SPA/node_modules/.cache/uglifyjs-webpack-plugin
