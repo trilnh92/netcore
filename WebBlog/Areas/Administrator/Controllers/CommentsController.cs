@@ -7,23 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
+using WebBlog.Services.IServices;
 
 namespace WebBlog.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
     public class CommentsController : Controller
     {
-        private readonly WebBlogDbContext _context;
+        private readonly ICommentService _commentServicce;
 
-        public CommentsController(WebBlogDbContext context)
+        public CommentsController(ICommentService commentServicce)
         {
-            _context = context;
+            _commentServicce = commentServicce;
         }
 
         // GET: Administrator/Comments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comments.ToListAsync());
+            return View(await _commentServicce.GetAllAsync());
         }
 
         // GET: Administrator/Comments/Details/5
@@ -34,8 +35,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .SingleOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentServicce.GetByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -59,8 +59,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
-                await _context.SaveChangesAsync();
+                await _commentServicce.CreateAsync(comment);
                 return RedirectToAction(nameof(Index));
             }
             return View(comment);
@@ -74,7 +73,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments.SingleOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentServicce.GetByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -98,8 +97,7 @@ namespace WebBlog.Areas.Administrator.Controllers
             {
                 try
                 {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
+                    await _commentServicce.UpdateAsync(comment);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +123,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .SingleOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentServicce.GetByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -140,15 +137,16 @@ namespace WebBlog.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comments.SingleOrDefaultAsync(m => m.CommentId == id);
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            var comment = await _commentServicce.GetByIdAsync(id);
+            comment.IsDeleted = true;
+            await _commentServicce.UpdateAsync(comment);
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool CommentExists(int id)
         {
-            return _context.Comments.Any(e => e.CommentId == id);
+            return _commentServicce.CommentExists(id);
         }
     }
 }

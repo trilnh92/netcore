@@ -8,3 +8,8 @@ export function apiGetArticles(callback:any, errorCallback:any) {
     fetchApi(url, 'GET', undefined, callback, errorCallback);
 }
 
+/* Categories */
+export function apiGetCategories(callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL+ServiceUrl.CATEGORY_URL;
+    fetchApi(url,'GET', undefined, callback, errorCallback);
+}

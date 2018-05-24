@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
+using WebBlog.Services.IServices;
 
 namespace WebBlog.Api.Controllers
 {
+    [EnableCors("AllowAllHeaders")]
     [Produces("application/json")]
     [Route("api/Categories")]
     public class CategoriesController : Controller
     {
-        private readonly WebBlogDbContext _context;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(WebBlogDbContext context)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         // GET: api/Categories
         [HttpGet]
-        public IEnumerable<Category> GetCategories()
+        public async Task<IEnumerable<Category>> GetCategories()
         {
-            return _context.Categories;
+            return await _categoryService.GetAllAsync();
         }
 
         // GET: api/Categories/5
@@ -37,7 +40,7 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var category = await _context.Categories.SingleOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryService.GetByIdAsync(id);
 
             if (category == null)
             {
@@ -59,13 +62,11 @@ namespace WebBlog.Api.Controllers
             if (id != category.CategoryId)
             {
                 return BadRequest();
-            }
-
-            _context.Entry(category).State = EntityState.Modified;
+            }            
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _categoryService.UpdateAsync(category);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -90,9 +91,7 @@ namespace WebBlog.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            await _categoryService.CreateAsync(category);
 
             return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
         }
@@ -106,21 +105,20 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var category = await _context.Categories.SingleOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            await _categoryService.DeleteAsync(category);
 
             return Ok(category);
         }
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _categoryService.CategoryExists(id);
         }
     }
 }

@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
+using WebBlog.Services.IServices;
 
 namespace WebBlog.Api.Controllers
 {
+    [EnableCors("AllowAllHeaders")]
     [Produces("application/json")]
     [Route("api/Comments")]
     public class CommentsController : Controller
     {
-        private readonly WebBlogDbContext _context;
+        private readonly ICommentService _commentService;
 
-        public CommentsController(WebBlogDbContext context)
+        public CommentsController(ICommentService commentService)
         {
-            _context = context;
+            _commentService = commentService;
         }
 
         // GET: api/Comments
         [HttpGet]
-        public IEnumerable<Comment> GetComments()
+        public async Task<IEnumerable<Comment>> GetComments()
         {
-            return _context.Comments;
+            return await _commentService.GetAllAsync();
         }
 
         // GET: api/Comments/5
@@ -37,7 +40,7 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var comment = await _context.Comments.SingleOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentService.GetByIdAsync(id);
 
             if (comment == null)
             {
@@ -60,12 +63,10 @@ namespace WebBlog.Api.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(comment).State = EntityState.Modified;
-
+            
             try
             {
-                await _context.SaveChangesAsync();
+                await _commentService.UpdateAsync(comment);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -91,8 +92,7 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+            await _commentService.CreateAsync(comment);
 
             return CreatedAtAction("GetComment", new { id = comment.CommentId }, comment);
         }
@@ -106,21 +106,20 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var comment = await _context.Comments.SingleOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentService.GetByIdAsync(id);
             if (comment == null)
             {
                 return NotFound();
             }
-
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            comment.IsDeleted = true;
+            await _commentService.UpdateAsync(comment);
 
             return Ok(comment);
         }
 
         private bool CommentExists(int id)
         {
-            return _context.Comments.Any(e => e.CommentId == id);
+            return _commentService.CommentExists(id);
         }
     }
 }

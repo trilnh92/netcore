@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
+using WebBlog.Services.IServices;
 
 namespace WebBlog.Api.Controllers
 {
@@ -15,38 +16,40 @@ namespace WebBlog.Api.Controllers
     [Produces("application/json")]
     [Route("api/Articles")]
     public class ArticlesController : Controller
-    {
-        private readonly WebBlogDbContext _context;
+    {        
+        private readonly IArticleService _articleService;
+        private readonly ICategoryService _categoryService;
 
-        public ArticlesController(WebBlogDbContext context)
+        public ArticlesController(IArticleService articleService, ICategoryService categoryService)
         {
-            _context = context;
+            _articleService = articleService;
+            _categoryService = categoryService;
         }
 
         // GET: api/Articles
         [HttpGet]
-        public IEnumerable<Article> GetArticles()
-        {
-            return _context.Articles;
+        public async Task<IEnumerable<Article>> Index()
+        {            
+            return await _articleService.GetAllAsync();
         }
 
         // GET: api/Articles/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetArticle([FromRoute] int id)
+        public async Task<IActionResult> GetArticle([FromRoute] int id)        
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.SingleOrDefaultAsync(m => m.ArticleId == id);
+            var article = await _articleService.GetByIdAsync(id);
 
             if (article == null)
             {
                 return NotFound();
             }
 
-            return Ok(article);
+            return Ok(article);            
         }
 
         // PUT: api/Articles/5
@@ -63,11 +66,9 @@ namespace WebBlog.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(article).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _articleService.UpdateAsync(article);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -92,9 +93,8 @@ namespace WebBlog.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            _context.Articles.Add(article);
-            await _context.SaveChangesAsync();
+            
+            await _articleService.CreateAsync(article);            
 
             return CreatedAtAction("GetArticle", new { id = article.ArticleId }, article);
         }
@@ -108,21 +108,21 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var article = await _context.Articles.SingleOrDefaultAsync(m => m.ArticleId == id);
+            var article = await _articleService.GetByIdAsync(id);
             if (article == null)
             {
                 return NotFound();
             }
 
-            _context.Articles.Remove(article);
-            await _context.SaveChangesAsync();
+            article.IsDeleted = true;
+            await _articleService.UpdateAsync(article);
 
             return Ok(article);
         }
 
         private bool ArticleExists(int id)
         {
-            return _context.Articles.Any(e => e.ArticleId == id);
+            return _articleService.ArticleExists(id);
         }
     }
 }
