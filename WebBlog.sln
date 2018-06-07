@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBlog.UnitTest", "WebBlog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBlog.Api", "WebBlog.Api\WebBlog.Api.csproj", "{5FB2AFF1-F9D4-4A0E-B24A-2ECE7DF228DD}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebBlog.SPA(1)", "WebBlog.SPA\", "{3B642DE6-5B5C-4769-9184-2A0EE96B496F}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebBlog.SPA", "WebBlog.SPA", "{3B642DE6-5B5C-4769-9184-2A0EE96B496F}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65215"
@@ -41,7 +41,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebBlog.SPA(1)", "WebBlog.S
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "65215"
+		SlnRelativePath = "WebBlog.SPA\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBlog.Auth", "WebBlog.Auth\WebBlog.Auth.csproj", "{309D0F04-371F-42D0-8FA8-E588789B8546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +80,10 @@ Global
 		{3B642DE6-5B5C-4769-9184-2A0EE96B496F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B642DE6-5B5C-4769-9184-2A0EE96B496F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B642DE6-5B5C-4769-9184-2A0EE96B496F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{309D0F04-371F-42D0-8FA8-E588789B8546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{309D0F04-371F-42D0-8FA8-E588789B8546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{309D0F04-371F-42D0-8FA8-E588789B8546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{309D0F04-371F-42D0-8FA8-E588789B8546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +96,7 @@ Global
 		{EE543A3C-E1DC-4CF8-B2FA-D5DDF1A91FD8} = {672003C7-C73D-4E88-BC40-20DBCF757E88}
 		{5FB2AFF1-F9D4-4A0E-B24A-2ECE7DF228DD} = {3720454D-6C4E-4B60-9CF3-119226CB1D42}
 		{3B642DE6-5B5C-4769-9184-2A0EE96B496F} = {3720454D-6C4E-4B60-9CF3-119226CB1D42}
+		{309D0F04-371F-42D0-8FA8-E588789B8546} = {3720454D-6C4E-4B60-9CF3-119226CB1D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1FDF932-2299-4237-B4D1-41F1654E7A4A}
