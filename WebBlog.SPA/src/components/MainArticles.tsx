@@ -37,14 +37,13 @@ export class MainArticles extends React.Component<IMainArticlesProps, IMainArtic
     render() {
         return (
             <div>
-                <h1 className="my-4">Page Heading
-                    <small>Secondary Text</small>
+                <h1 className="my-4">Information technologies
                 </h1>
 
                 {this.state.articles && this.state.articles.map((article: any, i: number) => {
                     return (
                         <div key={i}>
-                            <ArticleSummary />
+                            <ArticleSummary article={article}/>
                         </div>
                     )
                 })}

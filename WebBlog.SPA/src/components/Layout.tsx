@@ -1,4 +1,6 @@
 import * as React from "react";
+import { BrowserRouter } from "react-router-dom"
+import { Route } from "react-router-dom"
 import { Search } from "./Search";
 import { Category } from "./Category";
 import { Article } from "./Article";
@@ -39,7 +41,10 @@ export class Layout extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                            <MainArticles />
+                            {/* <MainArticles /> */}
+                            {/* <Article/> */}
+                            <Route path="/" exact component={MainArticles} />
+                            <Route path="/article/:articleId" component={Article} />   
                         </div>
 
                         <div className="col-md-4">
