@@ -12,3 +12,17 @@ C:\Workspace\Practice\NetCore\WebBlog\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\W
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.dll
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.pdb
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.csprojResolveAssemblyReference.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\WebBlog.UnitTest.deps.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\WebBlog.UnitTest.runtimeconfig.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\WebBlog.UnitTest.runtimeconfig.dev.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\WebBlog.UnitTest.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\bin\Debug\netcoreapp2.0\WebBlog.UnitTest.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.csproj.CoreCompileInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.AssemblyInfoInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.AssemblyInfo.cs
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.UnitTest\obj\Debug\netcoreapp2.0\WebBlog.UnitTest.csprojAssemblyReference.cache

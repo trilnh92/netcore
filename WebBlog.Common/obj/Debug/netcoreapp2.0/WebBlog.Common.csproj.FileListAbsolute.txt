@@ -7,3 +7,11 @@ C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\Web
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.dll
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.pdb
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.csprojResolveAssemblyReference.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.deps.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\bin\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.csproj.CoreCompileInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.AssemblyInfoInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.AssemblyInfo.cs
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.pdb

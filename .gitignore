@@ -4,6 +4,8 @@
 
 /.vs/WebBlog/v15/Server/sqlite3/storage.ide-shm
 /.vs/WebBlog/v15/Server/sqlite3/storage.ide-wal
+/WebBlog/bin/*
+/WebBlog/obj/*
 /WebBlog.Api/bin/*
 /WebBlog.Api/bin/Debug/netcoreapp2.0/appsettings.json
 /WebBlog.Api/bin/Debug/netcoreapp2.0/WebBlog.Common.dll
@@ -22,3 +24,9 @@
 /WebBlog.Auth/obj
 /WebBlog.Database/bin/*
 /WebBlog.Database/bin/Debug/netcoreapp2.0
+/WebBlog.Common/bin/*
+/WebBlog.Common/obj/*
+/WebBlog.Services/bin/*
+/WebBlog.Services/obj/*
+/WebBlog.UnitTest/bin/*
+/WebBlog.UnitTest/obj/*

@@ -12,3 +12,17 @@ C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\W
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csprojResolveAssemblyReference.cache
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.dll
 C:\Workspace\Practice\NetCore\WebBlog\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.deps.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Services.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Database.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\bin\Debug\netcoreapp2.0\WebBlog.Database.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csprojAssemblyReference.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csproj.CoreCompileInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.AssemblyInfoInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.AssemblyInfo.cs
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.csproj.CopyComplete
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Services\obj\Debug\netcoreapp2.0\WebBlog.Services.pdb
