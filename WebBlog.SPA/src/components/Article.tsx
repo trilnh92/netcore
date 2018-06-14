@@ -17,7 +17,7 @@ export class Article extends React.Component<RouteComponentProps<any>, IArticleS
 		}
 	}
 
-	loadArticle = (articleId: number) => {		
+	loadArticle = (articleId: number) => {
 		apiGetArticleById(articleId, (response: any) => {
 			if (response.target.status == 200) {
 				let data = JSON.parse(response.target.responseText);
@@ -33,8 +33,8 @@ export class Article extends React.Component<RouteComponentProps<any>, IArticleS
 		const articleId = this.props.match.params.articleId ? this.props.match.params.articleId : 0;
 		this.loadArticle(Number(articleId));
 	}
-	
-	decodeHtml = (html:string) => {
+
+	decodeHtml = (html: string) => {
 		var txt = document.createElement("textarea");
 		txt.innerHTML = html;
 		return txt.value;
@@ -44,27 +44,19 @@ export class Article extends React.Component<RouteComponentProps<any>, IArticleS
 		return (
 			<div>
 
-				<h1 className="mt-4">{this.state.article?this.state.article.title:''}</h1>
+				<h1 className="mt-4">{this.state.article ? this.state.article.title : ''}</h1>
 
 				<p className="lead">
-					<span>	by <a href="#">{this.state.article?this.state.article.createdBy:''}</a>
+					<span>	by <a href="#">{this.state.article ? this.state.article.createdBy : ''}</a>
 					</span>
 				</p>
 				<hr />
 
-
-				<p>Posted on {this.state.article?this.state.article.createdDate:''}</p>
-
-				<hr />
-
-
-				<img className="img-fluid rounded" src="http://placehold.it/900x300" alt="" />
+				<p>Posted on {this.state.article ? this.state.article.createdDate : ''}</p>
 
 				<hr />
-				{
-					// this.decodeHtml(this.state.article?this.state.article.fullContent:'')				
-				}
-				<div dangerouslySetInnerHTML={{ __html: this.state.article?this.state.article.fullContent:''}} />
+				<hr />
+				<div dangerouslySetInnerHTML={{ __html: this.state.article ? this.state.article.fullContent : '' }} />
 				<hr />
 
 

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WebBlog.Common;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
@@ -12,16 +15,21 @@ using WebBlog.Services.IServices;
 
 namespace WebBlog.Areas.Administrator.Controllers
 {
+    [Authorize]
     [Area("Administrator")]
     public class ArticlesController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;        
         private readonly IArticleService _articleService;
         private readonly ICategoryService _categoryService;
+        private readonly ILogger _logger;
 
-        public ArticlesController(IArticleService articleService, ICategoryService categoryService)
+        public ArticlesController(IArticleService articleService, ICategoryService categoryService, UserManager<ApplicationUser> userManager, ILogger<ArticlesController> logger)
         {
+            _userManager = userManager;
             _articleService = articleService;
             _categoryService = categoryService;
+            _logger = logger;
         }
 
         // GET: Administrator/Articles
@@ -74,6 +82,15 @@ namespace WebBlog.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    _logger.LogWarning("User is NULL");
+                    throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                }
+
+                article.CreatedBy = article.UpdatedBy =  user.Email;
+                
                 await _articleService.CreateAsync(article);
                 return RedirectToAction(nameof(Index));
             }

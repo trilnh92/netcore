@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
   
-    serviceAPI: 'http://localhost:59847',
+    serviceAPI: 'http://localhost:52898',
     authAPI: 'http://localhost:62237'
   };
