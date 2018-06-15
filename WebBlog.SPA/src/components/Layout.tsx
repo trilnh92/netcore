@@ -5,6 +5,8 @@ import { Search } from "./Search";
 import { Category } from "./Category";
 import { Article } from "./Article";
 import { MainArticles } from "./MainArticles";
+import { Register } from "./Register";
+import { Login } from "./Login";
 
 export class Layout extends React.Component {
 
@@ -28,6 +30,12 @@ export class Layout extends React.Component {
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">My profile</a>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">Login</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/register">Register</Link>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -39,7 +47,9 @@ export class Layout extends React.Component {
                             {/* <MainArticles /> */}
                             {/* <Article/> */}
                             <Route path="/" exact component={MainArticles} />
-                            <Route path="/article/:articleId" component={Article} />   
+                            <Route path="/article/:articleId" component={Article} />
+                            <Route path="/login" component={Login} />
+                            <Route path="/register" component={Register} />
                         </div>
 
                         <div className="col-md-4">

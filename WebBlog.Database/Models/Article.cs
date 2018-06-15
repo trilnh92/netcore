@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -73,5 +74,11 @@ namespace WebBlog.Database.Models
         public string Ext2 { get; set; }
 
         public string Ext3 { get; set; }
+    }
+
+    public class ArticleViewModel : Article
+    {
+        public IFormFile PresentImage { get; set; }
+        public string Author { get; set; }
     }
 }

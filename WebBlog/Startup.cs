@@ -14,6 +14,8 @@ using WebBlog.Database.Models;
 using WebBlog.Services.Services;
 using WebBlog.Services.IServices;
 using WebBlog.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace WebBlog
 {
@@ -46,6 +48,10 @@ namespace WebBlog
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddMvc();
         }
