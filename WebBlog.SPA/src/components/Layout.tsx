@@ -1,5 +1,4 @@
 import * as React from "react";
-import { BrowserRouter } from "react-router-dom"
 import { Route, Link } from "react-router-dom"
 import { Search } from "./Search";
 import { Category } from "./Category";
@@ -7,8 +6,55 @@ import { Article } from "./Article";
 import { MainArticles } from "./MainArticles";
 import { Register } from "./Register";
 import { Login } from "./Login";
+import { MyProfile } from "./MyProfile";
+import { MyBlogs } from "./MyBlogs";
+import { CreateBlog } from "./CreateBlog";
 
-export class Layout extends React.Component {
+import { UserManager } from 'oidc-client'
+
+interface IAppPros {
+
+}
+
+interface IAppState {
+    userProfile: any;
+    userManager:any;
+}
+
+export class Layout extends React.Component<IAppPros, IAppState> {
+
+    constructor(props: any) {
+        super(props);
+
+        //Initial config application
+        var config = {
+            authority: "http://localhost:52960",
+            client_id: "WebBlogAuthentication",
+            redirect_uri: "http://localhost:5000/callback.html",
+            response_type: "id_token token",
+            scope:"openid profile api1",
+            post_logout_redirect_uri : "http://localhost:5000/",
+        };
+
+        const retrievedUserProfile = localStorage.getItem('userProfile');
+
+        this.state = {
+            userProfile: retrievedUserProfile?retrievedUserProfile:undefined,
+            userManager: new UserManager(config)
+        }
+    }
+
+    logOut = (e: any) => {
+        e.preventDefault();
+        this.setState({ userProfile: undefined });
+        localStorage.removeItem('userProfile');
+    }
+
+    setUserProfile = (profile: any) => {
+        this.setState({ userProfile: profile });
+        //Set to local storage
+        localStorage.setItem('userProfile', JSON.stringify(profile));
+    }
 
     render() {
         return (
@@ -21,22 +67,40 @@ export class Layout extends React.Component {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarResponsive">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item active">
-                                    <a className="nav-link" href="#">My blogs
-                                         <span className="sr-only">(current)</span>
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">My profile</a>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/login">Login</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/register">Register</Link>
-                                </li>
-                            </ul>
+                            {
+                                (() => {
+                                    if (this.state.userProfile != undefined) {
+                                        return (
+                                            <ul className="navbar-nav ml-auto">
+                                                <li className="nav-item active">
+                                                    <Link className="nav-link" to="/myblogs">My blogs</Link>
+                                                </li>
+                                                <li className="nav-item active">
+                                                    <Link className="nav-link" to="/createblog">Write blog</Link>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <Link className="nav-link" to="/myprofile">My profile</Link>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a className="nav-link" href="#" onClick={(e) => this.logOut(e)}>Logout </a>
+                                                </li>
+                                            </ul>
+                                        )
+                                    } else {
+                                        return (
+                                            <ul className="navbar-nav ml-auto">
+
+                                                <li className="nav-item">
+                                                    <Link className="nav-link" to="/login">Login</Link>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <Link className="nav-link" to="/register">Register</Link>
+                                                </li>
+                                            </ul>
+                                        )
+                                    }
+                                })()
+                            }
                         </div>
                     </div>
                 </nav>
@@ -44,12 +108,13 @@ export class Layout extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                            {/* <MainArticles /> */}
-                            {/* <Article/> */}
                             <Route path="/" exact component={MainArticles} />
                             <Route path="/article/:articleId" component={Article} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/register" component={Register} />
+                            <Route path="/login"component={() => <Login setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
+                            <Route path="/register" component={() => <Register setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
+                            <Route path="/myprofile" component={() => <MyProfile myProfile={this.state.userProfile} />} />
+                            <Route path="/myblogs" component={MyBlogs} />
+                            <Route path="/createblog" component={() => <CreateBlog userProfile={this.state.userProfile} />} />
                         </div>
 
                         <div className="col-md-4">

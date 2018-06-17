@@ -33,7 +33,9 @@ namespace WebBlog.Auth.Services
             var claims = principal.Claims.ToList();
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.FirstName));
+            claims.Add(new Claim(JwtClaimTypes.FamilyName, user.LastName));
             claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+
 
             context.IssuedClaims = claims;
         }

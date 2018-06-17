@@ -30,6 +30,7 @@ namespace WebBlog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //This is not good solution. Should find another solution
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllHeaders",

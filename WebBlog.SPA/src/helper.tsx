@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-export const fetchApi = (url:string, method:string, data:any, callback: any, errorCallback:any) => {
+export const fetchApi = (url: string, method: string, data: any, callback: any, errorCallback: any) => {
     var xhr = new XMLHttpRequest();
     xhr.onload = callback;
     xhr.onerror = errorCallback;
+
     xhr.open(method, url, true);
+
     xhr.setRequestHeader("Pragma", "no-cache");
     xhr.setRequestHeader("Expires", "-1");
     xhr.setRequestHeader('Cache-Control', 'no-cache');
@@ -16,7 +18,27 @@ export const fetchApi = (url:string, method:string, data:any, callback: any, err
     }
 }
 
-export const fetchImageApi = (url:any, method:any, imageFile:any, callback:any, errorCallback:any) => {
+export const fetchLogin = (url:string, data:any, callback:any, errorCallback:any) =>{
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+
+    formData.append("grant_type", data.grant_type);
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+    formData.append("scope", data.scope);
+    formData.append("client_id", data.client_id);
+    formData.append("client_secret", data.client_secret);
+
+    xhr.onload = callback;
+    xhr.onerror = errorCallback;
+
+    xhr.open('POST',url, true);
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.send(formData);
+}
+
+export const fetchImageApi = (url: any, method: any, imageFile: any, callback: any, errorCallback: any) => {
 
     let imageFormData = new FormData();
     imageFormData.append('imageFile', imageFile);
@@ -32,7 +54,7 @@ export const fetchImageApi = (url:any, method:any, imageFile:any, callback:any, 
     xhr.send(imageFormData);
 }
 
-export const fetchMultipartApi = (url:string, method:string, data:any, callback: any, errorCallback:any) => {
+export const fetchMultipartApi = (url: string, method: string, data: any, callback: any, errorCallback: any) => {
     let formData = new FormData();
     for (let d in data) {
         if (data[d]) {
@@ -51,21 +73,21 @@ export const fetchMultipartApi = (url:string, method:string, data:any, callback:
     xhr.send(formData);
 }
 
-export const isValidEmail = (emailAddress:string) => {
+export const isValidEmail = (emailAddress: string) => {
     if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailAddress)) {
         return true;
     }
     return false;
 }
 
-export function capitalizeFirstLetter(text:string) {
+export function capitalizeFirstLetter(text: string) {
     if (text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
     }
     return '';
 }
 
-export function getSuffixDayOfMonth(day:number) {
+export function getSuffixDayOfMonth(day: number) {
     if (day) {
         if (day % 30 == 1) {
             return 'st';
@@ -83,7 +105,7 @@ export function getSuffixDayOfMonth(day:number) {
     return '';
 }
 
-export function imageExists(imageUrl:string) {
+export function imageExists(imageUrl: string) {
     try {
         var http = new XMLHttpRequest();
         http.open('HEAD', imageUrl, false);
@@ -95,16 +117,16 @@ export function imageExists(imageUrl:string) {
     }
 }
 
-export function getAnteOrPostMeridiemTime(time:string){
-    if(!time){
+export function getAnteOrPostMeridiemTime(time: string) {
+    if (!time) {
         return '';
     }
     let timeRet = '';
     if (parseInt(time.split(':')[0]) >= 12) {
         let num = parseInt(time.split(':')[0]) - 12;
-        timeRet= ((( num < 10)?'0':'') + num) + ':' + time.split(':')[1] + ' pm'
+        timeRet = (((num < 10) ? '0' : '') + num) + ':' + time.split(':')[1] + ' pm'
     } else {
-        timeRet = time.split(':')[0] +':'+time.split(':')[1] + ' am'
+        timeRet = time.split(':')[0] + ':' + time.split(':')[1] + ' am'
     }
     return timeRet;
 }
@@ -115,3 +137,9 @@ export function guid() {
         return v.toString(16);
     });
 }
+
+export function parseJwt (token:string) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+};

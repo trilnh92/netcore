@@ -4,6 +4,7 @@
 
 /.vs/WebBlog/v15/Server/sqlite3/storage.ide-shm
 /.vs/WebBlog/v15/Server/sqlite3/storage.ide-wal
+/WebBlog/wwwroot/Articles/Uploaded/*
 /WebBlog/bin/*
 /WebBlog/obj/*
 /WebBlog.Api/bin/*

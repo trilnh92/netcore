@@ -44,6 +44,11 @@ namespace WebBlog.Auth
                     {
                         new Secret("T2iHoangWebBlog@123!".Sha256())
                     },
+
+                    RedirectUris           = { "http://localhost:5000/callback" },
+                    PostLogoutRedirectUris = { "http://localhost:5000/" },
+                    AllowedCorsOrigins = { "http://localhost:5000" },
+
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
