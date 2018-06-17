@@ -28,3 +28,11 @@ export class ArticleModel {
     Ext2: string= '';
     Ext3: string= '';
 }
+
+export class CreateArticleViewModel{
+    Title:string = '';
+    CreatedBy:string = '';
+    Tags:string='';
+    Image:string='';
+    FullContent:string = '';
+}

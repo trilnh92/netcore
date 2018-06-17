@@ -1,4 +1,4 @@
-import { fetchApi, fetchLogin } from './helper';
+import { fetchApi, fetchLogin, fetchImageApi } from './helper';
 import { BaseUrl } from './base.url';
 import { ServiceUrl } from './service.url';
 import { AuthUrl } from './auth.url';
@@ -9,9 +9,24 @@ export function apiGetArticles(callback: any, errorCallback: any) {
     fetchApi(url, 'GET', undefined, callback, errorCallback);
 }
 
+export function apiGetArticlesByUser(userModel:any, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'GetArticlesByUser';
+    fetchApi(url, 'POST', userModel, callback, errorCallback);
+}
+
 export function apiGetArticleById(articleId: number, callback: any, errorCallback: any) {
     var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + articleId;
     fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
+export function apiCreateArticle(article: any, callback: any, errorCallback: any) {
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL;
+    fetchApi(url, 'POST', article, callback, errorCallback);
+}
+
+export function apiUploadPhoto(articleImage:any, callback:any, errorCallback:any) {
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'UploadPhoto';
+    fetchImageApi(url, 'POST', articleImage, callback, errorCallback);
 }
 
 /* Categories */

@@ -14,6 +14,8 @@ namespace WebBlog.Services.IServices
         Task UpdateAsync(Article article);
         Task DeleteAsync(Article article);
         Task<IEnumerable<Article>> GetAllAsync();
+        Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email);
+        Task<IEnumerable<Article>> GetAllVisibleAsync();
         Task<IEnumerable<Article>> GetAllRemovedAsync();
     }
 }

@@ -47,7 +47,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
         }
 
         apiLoginAccount(loginModel, (response: any) => {
-            let self = this;
+
             if (response.target.status == 200) {
                 let data = JSON.parse(response.target.responseText);
                 const token = parseJwt(data.access_token)
@@ -56,17 +56,13 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
                     "lastName": token.family_name,
                     "email": token.email
                 }
-                // let newState = { ...this.state };
-                // newState.redirectToMyProfile = true;
-                // self.setState(newState);
-
                 this.setState({ redirectToMyProfile: true });
                 this.setUserProfile(userInfo);
             }
         },
             (errors: any) => {
-                // this.setState({ redirectToMyProfile: false });
-                this.setState({ errorMessage: 'Error when register account!' });
+                 this.setState({ redirectToMyProfile: false });
+                this.setState({ errorMessage: 'Error when login account!' });
             })
 
     }

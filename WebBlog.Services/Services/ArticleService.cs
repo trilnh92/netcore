@@ -37,6 +37,16 @@ namespace WebBlog.Services.Services
             return await _unitOfWork.ArticleRepository.FindAllAsync(x => !x.IsDeleted);
         }
 
+        public async Task<IEnumerable<Article>> GetAllVisibleAsync()
+        {
+            return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.IsVisible && !x.IsDeleted);
+        }
+
+        public async Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email)
+        {
+            return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.CreatedBy == email && !x.IsDeleted);
+        }
+
         public async Task<Article> GetByIdAsync(int id)
         {
             return await _unitOfWork.ArticleRepository.FindAsync(x => x.ArticleId == id);

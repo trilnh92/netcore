@@ -28,7 +28,7 @@ export class ArticleSummary extends React.Component<IArticleSummaryProps, IArtic
                 </div>
                 <div className="card-footer text-muted">
                     Posted on {this.state.article.createdDate} by
-                <a href="#">{this.state.article.createdBy}</a>
+                <span> <a href="#"> {this.state.article.createdBy}</a></span>
                 </div>
             </div>
         )

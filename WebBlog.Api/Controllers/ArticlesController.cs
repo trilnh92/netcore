@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
+using WebBlog.Database.Models.UserViewModels;
 using WebBlog.Services.IServices;
 
 namespace WebBlog.Api.Controllers
@@ -19,17 +22,19 @@ namespace WebBlog.Api.Controllers
     {        
         private readonly IArticleService _articleService;
         private readonly ICategoryService _categoryService;
+        private readonly IConfiguration _configuration;
 
-        public ArticlesController(IArticleService articleService, ICategoryService categoryService)
+        public ArticlesController(IArticleService articleService, ICategoryService categoryService, IConfiguration configuration)
         {
             _articleService = articleService;
             _categoryService = categoryService;
+            _configuration = configuration;
         }
 
         // GET: api/Articles
         [HttpGet]
         public async Task<IEnumerable<Article>> Index()
-        {            
+        {
             return await _articleService.GetAllAsync();
         }
 
@@ -87,16 +92,56 @@ namespace WebBlog.Api.Controllers
 
         // POST: api/Articles
         [HttpPost]
-        public async Task<IActionResult> PostArticle([FromBody] Article article)
+        public async Task<IActionResult> PostArticle([FromBody] CreateArticleViewModel createArticle)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             
-            await _articleService.CreateAsync(article);            
+            //var tags = string.Empty;
+            //createArticle.Tags?.ToList().ForEach(x => {
+            //    tags += (x + ",");
+            //});
+            //if (tags.Length > 1)
+            //    tags = tags.Substring(0, tags.Length - 1);
 
-            return CreatedAtAction("GetArticle", new { id = article.ArticleId }, article);
+            var tags = createArticle.Tags;
+
+            var article = new Article()
+            {
+                BriefContent = createArticle.FullContent.Length > 50 ? createArticle.FullContent.Substring(0, 50) : "",
+                CategoryArticleId = -1, //No category
+                CreatedBy = createArticle.CreatedBy,
+                CreatedDate = DateTime.Now,
+                Ext = tags,
+                FullContent = createArticle.FullContent,
+                Image = createArticle.Image,
+                IsDeleted = false,
+                IsHot = false,
+                IsVisible = true,
+                Title = createArticle.Title,
+                UpdatedBy = createArticle.CreatedBy,
+                UpdatedDate = DateTime.Now
+            };
+
+            try
+            {
+                await _articleService.CreateAsync(article);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("GetArticlesByUser")]
+        public async Task<IEnumerable<Article>> GetArticlesByUser([FromBody] UserViewModel user)
+        {
+            var email = user.Email;
+            return await _articleService.GetAllByUserEmailAsync(email);
         }
 
         // DELETE: api/Articles/5
@@ -118,6 +163,60 @@ namespace WebBlog.Api.Controllers
             await _articleService.UpdateAsync(article);
 
             return Ok(article);
+        }
+
+        [HttpPost]
+        [Route("UploadPhoto")]
+        public async Task<object> UploadPhoto()
+        {
+            var file = Request.Form.Files[0];
+            var imagePath = string.Empty;
+            if (file != null && file.Length != 0)
+            {
+                try
+                {
+                    var path = Path.Combine(
+                                Directory.GetCurrentDirectory(), "wwwroot", "Articles", "Uploaded");
+
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+
+                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                    var physicalFileName = Path.Combine(path, fileName);
+
+                    using (var stream = new FileStream(physicalFileName, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var serverUrl = _configuration["ServerAPIUrl"].ToString();
+                    var imageSrc = string.Format("{0}{1}/{2}/{3}", serverUrl, "Articles", "Uploaded", fileName);
+
+                    imagePath = imageSrc;
+
+                    return Json(new
+                    {
+                        data = imagePath,
+                        success = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new
+                    {
+                        errorMessage = ex.Message,
+                        success = false
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    errorMessage = "File is NULL",
+                    success = false
+                });
+            }          
         }
 
         private bool ArticleExists(int id)

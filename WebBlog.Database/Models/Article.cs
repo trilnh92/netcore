@@ -81,4 +81,23 @@ namespace WebBlog.Database.Models
         public IFormFile PresentImage { get; set; }
         public string Author { get; set; }
     }
+
+    public class CreateArticleViewModel
+    {
+        public string Title { get; set; }
+        public string CreatedBy { get; set; }
+        public string Tags { get; set; }
+        public string Image { get; set; }
+        public string FullContent { get; set; }
+    }
+
+    public class ArticleImageViewModel
+    {
+        public IFormFile Image { get; set; }
+        //public string source { get; set; }
+        //public long Size { get; set; }
+        //public int Width { get; set; }
+        //public int Height { get; set; }
+        //public string Extension { get; set; }
+    }
 }

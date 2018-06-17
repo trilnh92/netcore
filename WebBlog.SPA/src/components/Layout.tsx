@@ -39,7 +39,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
         const retrievedUserProfile = localStorage.getItem('userProfile');
 
         this.state = {
-            userProfile: retrievedUserProfile?retrievedUserProfile:undefined,
+            userProfile: retrievedUserProfile?JSON.parse(retrievedUserProfile):undefined,
             userManager: new UserManager(config)
         }
     }
@@ -113,7 +113,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                             <Route path="/login"component={() => <Login setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
                             <Route path="/register" component={() => <Register setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
                             <Route path="/myprofile" component={() => <MyProfile myProfile={this.state.userProfile} />} />
-                            <Route path="/myblogs" component={MyBlogs} />
+                            <Route path="/myblogs" component={() => <MyBlogs myProfile={this.state.userProfile} />} />
                             <Route path="/createblog" component={() => <CreateBlog userProfile={this.state.userProfile} />} />
                         </div>
 

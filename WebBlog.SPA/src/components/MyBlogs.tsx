@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { ArticleSummary } from './ArticleSummary';
-import { apiGetArticles } from '../apiService';
-import { ArticleModel } from '../models/article.model';
+import { apiGetArticlesByUser } from '../apiService';
+import { Redirect } from 'react-router-dom'
 
 interface IMyBlogsProps {
+    myProfile:any;
 }
 
 interface IMyBlogsState {
@@ -19,7 +20,10 @@ export class MyBlogs extends React.Component<IMyBlogsProps, IMyBlogsState> {
     }
 
     loadArticles = () => {
-        apiGetArticles((response: any) => {
+        let email = this.props.myProfile?this.props.myProfile.email:'';
+        let userModel = {"Email":email};
+
+        apiGetArticlesByUser(userModel, (response: any) => {
             if (response.target.status == 200) {
                 let data = JSON.parse(response.target.responseText);
                 this.setState({ articles: data })
@@ -30,11 +34,15 @@ export class MyBlogs extends React.Component<IMyBlogsProps, IMyBlogsState> {
             })
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.loadArticles();
     }
 
     render() {
+        if(this.props.myProfile == undefined || this.props.myProfile.email == undefined){
+            return <Redirect to='/' />;
+        }
+
         return (
             <div>
                 <h1 className="my-4">My blogs
