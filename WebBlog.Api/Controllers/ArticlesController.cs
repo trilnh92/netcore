@@ -98,15 +98,16 @@ namespace WebBlog.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             //var tags = string.Empty;
-            //createArticle.Tags?.ToList().ForEach(x => {
+            //createArticle.Tags?.ToList().ForEach(x =>
+            //{
             //    tags += (x + ",");
             //});
             //if (tags.Length > 1)
             //    tags = tags.Substring(0, tags.Length - 1);
 
-            var tags = createArticle.Tags;
+            var tags = createArticle.Tags.Trim();
 
             var article = new Article()
             {

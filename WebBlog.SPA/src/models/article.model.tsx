@@ -32,7 +32,7 @@ export class ArticleModel {
 export class CreateArticleViewModel{
     Title:string = '';
     CreatedBy:string = '';
-    Tags:string='';
+    Tags:any;
     Image:string='';
     FullContent:string = '';
 }

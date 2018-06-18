@@ -1,7 +1,35 @@
 import * as React from 'react';
-import { apiCreateArticle, apiUploadPhoto } from './../apiService'
+import { WithContext as ReactTags } from 'react-tag-input';
+import { apiCreateArticle, apiUploadPhoto, apiGetCategories } from './../apiService'
 import { Redirect } from 'react-router-dom'
 import { CreateArticleViewModel } from './../models/article.model'
+
+export const COUNTRIES = [
+	"Afghanistan",
+	"Albania",
+	"Algeria",
+	"Andorra",
+	"Angola",
+	"Anguilla",
+	"Antigua &amp; Barbuda",
+	"Argentina",
+	"Armenia",
+	"Aruba"
+]
+
+const suggestions = COUNTRIES.map((country) => {
+	return {
+		id: country,
+		text: country
+	}
+})
+
+const KeyCodes = {
+	comma: 188,
+	enter: 13,
+};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 interface ICreateBlogProps {
 	userProfile: any;
@@ -12,7 +40,9 @@ interface ICreateBlogState {
 	errorMessage: string;
 	userProfile: any;
 	redirectToMyBlogs: boolean;
-	file:any;
+	file: any;
+	tags: any;
+	suggestions: any,
 }
 
 export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogState>{
@@ -24,8 +54,36 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 			errorMessage: '',
 			userProfile: this.props.userProfile,
 			redirectToMyBlogs: false,
-			file:undefined
+			file: undefined,
+			tags: [],
+			suggestions: [],
 		}
+
+		this.handleDelete = this.handleDelete.bind(this);
+		this.handleAddition = this.handleAddition.bind(this);
+		this.handleDrag = this.handleDrag.bind(this);
+	}
+
+	loadCategories = () => {
+		apiGetCategories((response: any) => {
+			if (response.target.status == 200) {
+				let data = JSON.parse(response.target.responseText);
+				const suggestions = data.map((category: any) => {
+					return {
+						id: category.name,
+						text: category.name
+					}
+				})
+				this.setState({ suggestions: suggestions })
+			}
+		},
+			(errors: any) => {
+				this.setState({ suggestions: [] });
+			})
+	}
+
+	componentWillMount() {
+		this.loadCategories();
 	}
 
 	handleImageChange = (event: any) => {
@@ -34,31 +92,30 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 		let file = event.target.files[0];
 
 		reader.onloadend = () => {
-			this.setState({file: file});
+			this.setState({ file: file });
 			this.uploadPhoto();
 		}
 		reader.readAsDataURL(file)
 	}
 
-	
-    uploadPhoto() {
-        apiUploadPhoto(this.state.file, (response:any) => {
-            if (response.target.status == 200) {
-                let data = JSON.parse(response.target.responseText);
-                if (data.success) {
-                    this.state.article.Image = data.data;
-                    this.setState({ article: this.state.article });
+
+	uploadPhoto() {
+		apiUploadPhoto(this.state.file, (response: any) => {
+			if (response.target.status == 200) {
+				let data = JSON.parse(response.target.responseText);
+				if (data.success) {
+					this.state.article.Image = data.data;
+					this.setState({ article: this.state.article });
 				}
-				else
-				{
+				else {
 					this.setState({ redirectToMyBlogs: false, errorMessage: data.errorMessage });
 				}
-            }
-        },
-            (errors:any) => {
+			}
+		},
+			(errors: any) => {
 				this.setState({ redirectToMyBlogs: false, errorMessage: 'Error when upload image' });
-            })
-    }
+			})
+	}
 
 	handleTextChange = (event: any, name: string) => {
 
@@ -67,10 +124,7 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 				this.state.article.Title = event.target.value;
 				break;
 			case 'fullcontent':
-				this.state.article.FullContent = event.target.value;
-				break;
-			case 'tags':
-				this.state.article.Tags = event.target.value;
+				this.state.article.FullContent = event.target.value;							
 				break;
 		}
 		this.setState({ article: this.state.article });
@@ -82,6 +136,15 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 
 		var article = this.state.article;
 		article.CreatedBy = this.state.userProfile ? this.state.userProfile.email : '';
+		let tags = '';
+		this.state.tags && this.state.tags.forEach((element:any) => {
+			tags+=(element.id + ',');
+		});
+
+		if (tags.length > 1)
+               tags = tags.substring(0, tags.length - 1);
+		
+		article.Tags =tags;
 
 		apiCreateArticle(article, (response: any) => {
 			if (response.target.status == 200) {
@@ -103,12 +166,38 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 
 	}
 
-	render() {
-		
-		if(this.props.userProfile == undefined || this.props.userProfile.email == undefined){
-            return <Redirect to='/' />;
+
+	handleDelete(i: number) {
+		const { tags } = this.state;
+		this.setState({
+			tags: tags.filter((tag: any, index: number) => index !== i),
+		});
+	}
+
+	handleAddition(tag: any) {
+		if (this.state.tags) {
+			this.state.tags.push(tag);
 		}
-		
+		this.setState({ tags: this.state.tags });
+	}
+
+	handleDrag(tag: any, currPos: number, newPos: number) {
+		const tags = [...this.state.tags];
+		const newTags = tags.slice();
+
+		newTags.splice(currPos, 1);
+		newTags.splice(newPos, 0, tag);
+
+		// re-render
+		this.setState({ tags: newTags });
+	}
+
+	render() {
+
+		if (this.props.userProfile == undefined || this.props.userProfile.email == undefined) {
+			return <Redirect to='/' />;
+		}
+
 		if (this.state.redirectToMyBlogs) {
 			return <Redirect to='/myblogs' />;
 		}
@@ -155,12 +244,12 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 								</div>
 								<div className="col-md-3">
 									{this.state.article.Image ?
-                                        (
-                                            <img width="100%" src={this.state.article.Image} alt="icon" />
-                                        ) : (
-                                            <img width="100%" src="images/img_not_available.png" alt="icon" />
-                                        )
-                                    }
+										(
+											<img width="100%" src={this.state.article.Image} alt="icon" />
+										) : (
+											<img width="100%" src="images/img_not_available.png" alt="icon" />
+										)
+									}
 								</div>
 
 							</div>
@@ -182,10 +271,16 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 							<div className="row">
 								<label className="col-md-3 control-label">Tags</label>
 								<div className="col-md-9">
-									<input type="text"
-										value={this.state.article ? this.state.article.Tags : ""}
-										onChange={evt => this.handleTextChange(evt, 'tags')}
-										className="form-control" placeholder="Tags" />
+									<div>
+										<ReactTags
+											tags={this.state.tags}
+											suggestions={this.state.suggestions}
+											delimiters={delimiters}
+											handleDelete={this.handleDelete}
+											handleAddition={this.handleAddition}
+											handleDrag={this.handleDrag}
+										/>
+									</div>
 								</div>
 							</div>
 						</div>
