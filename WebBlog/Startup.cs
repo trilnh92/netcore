@@ -48,6 +48,7 @@ namespace WebBlog
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICommentService, CommentService>();
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 

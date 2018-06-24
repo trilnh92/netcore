@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
 using WebBlog.Services.IServices;
@@ -16,16 +18,21 @@ namespace WebBlog.Areas.Administrator.Controllers
     [Area("Administrator")]
     public class CommentsController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly ICommentService _commentServicce;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CommentsController(ICommentService commentServicce)
+        public CommentsController(ICommentService commentServicce, IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _commentServicce = commentServicce;
+            _configuration = configuration;
+            _userManager = userManager;
         }
 
         // GET: Administrator/Comments
         public async Task<IActionResult> Index()
         {
+            ViewBag.ClientUrl = _configuration["ClientUIUrl"].ToString();
             return View(await _commentServicce.GetAllAsync());
         }
 
@@ -99,6 +106,15 @@ namespace WebBlog.Areas.Administrator.Controllers
             {
                 try
                 {
+                    var user = await _userManager.GetUserAsync(User);
+                    if (user == null)
+                    {
+                        throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                    }
+
+                    comment.UpdatedBy = user.Email;
+                    comment.UpdatedDate = DateTime.Now;
+
                     await _commentServicce.UpdateAsync(comment);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -140,6 +156,15 @@ namespace WebBlog.Areas.Administrator.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var comment = await _commentServicce.GetByIdAsync(id);
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            comment.DeletedBy = user.Email;
+            comment.DeletedDate = DateTime.Now;
             comment.IsDeleted = true;
             await _commentServicce.UpdateAsync(comment);
 

@@ -41,6 +41,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         public async Task<IActionResult> Index()
         {
             var result = await _articleService.GetAllAsync();
+            ViewBag.ClientUrl = _configuration["ClientUIUrl"].ToString();
             return View(result);
         }
 

@@ -47,7 +47,7 @@
                 {
                     <tr>
                         <td style="width: 150px">
-                            <a asp-area="Administrator" asp-controller="Articles" asp-action="Detail" asp-route-id="@item.ArticleId" target="_blank">@item.Title</a>
+                            <a href="@ViewBag.ClientUrl/article/@item.ArticleId" target="_blank">@item.Title</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)

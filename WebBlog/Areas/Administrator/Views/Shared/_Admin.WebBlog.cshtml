@@ -15,6 +15,13 @@
             <li><a asp-area="Administrator" asp-controller="Articles" asp-action="Recycle"><i class="icol-bin-closed"></i><span class="admin-text-menu article-recycle">Thùng rác</span></a></li>
         </ul>
     </li>
-    
+    <li class="active_comment rightMenu">
+        <span><i class="icon-comment"></i>Bình Luận</span>
+        <ul class="ulRightMenu" style="display: none;">
+            <li><a asp-area="Administrator" asp-controller="Comments" asp-action="Index"><i class="icol-page-white-stack"></i><span class="admin-text-menu comment-all">Tất cả bình luận</span></a></li>
+            <li><a asp-area="Administrator" asp-controller="Comments" asp-action="Create"><i class="icol-pencil"></i><span class="admin-text-menu comment-insert">Thêm bình luận mới</span></a></li>
+            <li><a asp-area="Administrator" asp-controller="Comments" asp-action="Recycle"><i class="icol-bin-closed"></i><span class="admin-text-menu comment-recycle">Thùng rác</span></a></li>
+        </ul>
+    </li>
     <li class="active_help"><a asp-area="Administrator" asp-controller="Help" asp-action="Index"><i class="icon-question-sign"></i>Help</a></li>
 </ul>

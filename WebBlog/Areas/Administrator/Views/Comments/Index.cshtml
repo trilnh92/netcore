@@ -2,107 +2,82 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="mws-panel grid_8 mws-collapsible">
+    <div class="mws-panel-header admin-header">
+        <span><i class="icon-table"></i>Tất cả bình luận</span>
+    </div>
+    <div class="mws-panel-body no-padding ">
+        <div class="dataTables_wrapper">
+            <div class="filter">
+                Tìm kiếm:
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ParentId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeletedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeletedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdatedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsApproved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ext)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ArticleId)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsApproved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ext)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArticleId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CommentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CommentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <input type="text" name="keyword" id="" />
+                <button class="btn btn-primary" onclick="submit();">
+                    <i class="icon-search"></i>
+                </button>
+
+            </div>
+
+            <table class="mws-table mws-datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            Tác giả
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Bài viết
+                        </th>
+                        <th>
+                            Ngày bình luận
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            <a href="@ViewBag.ClientUrl/article/@item.ArticleId" target="_blank">@item.ArticleId</a>
+                        </td>
+                        <td>
+                                @item.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss tt")
+                          
+                        </td>
+                        <td>
+                            <span class="btn-group">
+                                <a class="btn btn-small" asp-area="Administrator" asp-controller="Comments" asp-action="Edit" asp-route-id="@item.CommentId">
+                                    <i title="Cập nhật bình luận" class="icol-text-signature"></i>
+                                </a>
+                                <a class="btn btn-small"
+                                   asp-area="Administrator" asp-controller="Comments" asp-action="Delete" asp-route-id="@item.CommentId">
+                                    <i title="Xóa bình luận" class="icol-cancel"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".active_comment").addClass("active");
+    $(".comment-all").attr("style", "color:#bc4343!important");
+    $(".active_comment .ulRightMenu").attr("style", "display: block;");
+</script>
+
