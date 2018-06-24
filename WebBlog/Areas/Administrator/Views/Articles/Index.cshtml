@@ -26,15 +26,12 @@
                     <tr>
                         <th>
                             Tựa đề
-                        </th>
-                        <th>
-                            Danh mục
-                        </th>
+                        </th>                       
                         <th>
                             Tác giả
                         </th>
                         <th>
-                            Bài viết hot
+                            Được hiển thị bài viết
                         </th>
                         <th>
                             Ngày tạo
@@ -53,13 +50,10 @@
                             <a asp-area="Administrator" asp-controller="Articles" asp-action="Detail" asp-route-id="@item.ArticleId" target="_blank">@item.Title</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CategoryArticleName)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
                         </td>
                         <td>
-                            @(item.IsHot ? System.Net.WebUtility.HtmlDecode("&#x2714;") : System.Net.WebUtility.HtmlDecode("&#x2718;"))
+                            @(item.IsVisible ? System.Net.WebUtility.HtmlDecode("&#x2714;") : System.Net.WebUtility.HtmlDecode("&#x2718;"))
                         </td>
                         <td>
                             @item.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss tt")

@@ -30,9 +30,9 @@ C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\bin\Debug\netcoreapp2.0\WebBlog.
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\bin\Debug\netcoreapp2.0\WebBlog.Services.pdb
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.csprojAssemblyReference.cache
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.csproj.CoreCompileInputs.cache
-C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.AssemblyInfoInputs.cache
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.AssemblyInfo.cs
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.csproj.CopyComplete
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.dll
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\WebBlog.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

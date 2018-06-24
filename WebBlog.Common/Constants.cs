@@ -8,6 +8,7 @@ namespace WebBlog.Common
     {
         public static readonly string API_URL = "";
         public static readonly string DefaultLanguage = "vi";
+        public const double BriefContentCharater = 200;
     }
 
     public class EnumCategoryType

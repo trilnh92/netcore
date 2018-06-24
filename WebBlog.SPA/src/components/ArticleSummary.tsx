@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {changeBrokenImage } from './../helper'
 
 interface IArticleSummaryProps {
     article:any;
@@ -20,7 +21,7 @@ export class ArticleSummary extends React.Component<IArticleSummaryProps, IArtic
     render() {
         return (
             <div className="card mb-4">
-                <img className="card-img-top" src={this.state.article.image} alt="Card image cap" />
+                <img className="card-img-top" src={this.state.article.image} alt="Card image cap" onError={(e) => changeBrokenImage(e.target)}/>
                 <div className="card-body">
                     <h2 className="card-title">{this.state.article.title}</h2>
                     <p className="card-text">{this.state.article.briefContent}</p>

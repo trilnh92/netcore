@@ -17,7 +17,7 @@ namespace WebBlog.Api.Controllers
 {
     [EnableCors("AllowAllHeaders")]
     [Produces("application/json")]
-    [Route("api/Articles")]
+    [Route("api/[controller]")]
     public class ArticlesController : Controller
     {        
         private readonly IArticleService _articleService;
@@ -35,7 +35,7 @@ namespace WebBlog.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Article>> Index()
         {
-            return await _articleService.GetAllAsync();
+            return await _articleService.GetAllVisibleAsync();
         }
 
         // GET: api/Articles/5
@@ -111,7 +111,7 @@ namespace WebBlog.Api.Controllers
 
             var article = new Article()
             {
-                BriefContent = createArticle.FullContent.Length > 50 ? createArticle.FullContent.Substring(0, 50) : "",
+                BriefContent = createArticle.FullContent.Length > 200 ? createArticle.FullContent.Substring(0, 200)+"..." : "",
                 CategoryArticleId = -1, //No category
                 CreatedBy = createArticle.CreatedBy,
                 CreatedDate = DateTime.Now,

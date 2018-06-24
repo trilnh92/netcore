@@ -127,7 +127,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                     CategoryArticleId = article.CategoryArticleId,
                     CategoryArticleName = article.CategoryArticleName,
                     CreatedBy = article.CreatedBy,
-                    CreatedDate = article.CreatedDate,
+                    CreatedDate = DateTime.Now,
                     DeletedBy = article.DeletedBy,
                     DeletedDate = article.DeletedDate,
                     Ext = article.Ext,
@@ -148,7 +148,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                     Source = article.Source,
                     Title = article.Title,
                     UpdatedBy = article.UpdatedBy,
-                    UpdatedDate = article.UpdatedDate,
+                    UpdatedDate = DateTime.Now,
                     ViewCount = article.ViewCount
                 };
                 
@@ -220,7 +220,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ArticleId,CategoryArticleId,CategoryArticleName,ViewCount,Image,Title,BriefContent,FullContent,Source,Index,IsVisible,SEName,SEOTitle,SEODescription,SEOKeywords,IsDeleted,IsHot,DeletedDate,DeletedBy,UpdatedDate,UpdatedBy,CreatedBy,CreatedDate,Position,Ext,Ext1,Ext2,Ext3, PresentImage")] ArticleViewModel article)
         {
             if (id != article.ArticleId)
@@ -293,7 +293,7 @@ namespace WebBlog.Areas.Administrator.Controllers
                         Source = article.Source,
                         Title = article.Title,
                         UpdatedBy = article.UpdatedBy,
-                        UpdatedDate = article.UpdatedDate,
+                        UpdatedDate = DateTime.Now,
                         ViewCount = article.ViewCount
                     };
 
@@ -334,11 +334,21 @@ namespace WebBlog.Areas.Administrator.Controllers
 
         // POST: Administrator/Articles/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                _logger.LogWarning("User is NULL");
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
             var article = await _articleService.GetByIdAsync(id);
             article.IsDeleted = true;
+            article.DeletedBy = user.Email;
+            article.DeletedDate = DateTime.Now;
+
             await _articleService.UpdateAsync(article);
             return RedirectToAction(nameof(Index));
         }

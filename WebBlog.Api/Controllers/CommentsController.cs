@@ -14,7 +14,7 @@ namespace WebBlog.Api.Controllers
 {
     [EnableCors("AllowAllHeaders")]
     [Produces("application/json")]
-    [Route("api/Comments")]
+    [Route("api/[controller]")]
     public class CommentsController : Controller
     {
         private readonly ICommentService _commentService;
@@ -92,9 +92,17 @@ namespace WebBlog.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _commentService.CreateAsync(comment);
+            comment.CreatedDate = DateTime.Now;        
 
-            return CreatedAtAction("GetComment", new { id = comment.CommentId }, comment);
+            try
+            {
+                await _commentService.CreateAsync(comment);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.Message });
+            }
         }
 
         // DELETE: api/Comments/5
@@ -120,6 +128,13 @@ namespace WebBlog.Api.Controllers
         private bool CommentExists(int id)
         {
             return _commentService.CommentExists(id);
+        }
+
+        [HttpGet]
+        [Route("GetCommentsByArticleById/{id}")]
+        public async Task<IEnumerable<Comment>> GetArticlesByUser([FromRoute] int id)
+        {
+            return await _commentService.GetAllByArticleIdAsync(id);
         }
     }
 }

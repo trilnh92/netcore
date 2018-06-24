@@ -14,6 +14,7 @@ namespace WebBlog.Services.IServices
         Task UpdateAsync(Comment comment);
         Task DeleteAsync(Comment comment);
         Task<IEnumerable<Comment>> GetAllAsync();
+        Task<IEnumerable<Comment>> GetAllByArticleIdAsync(int articleId);
         Task<IEnumerable<Comment>> GetAllRemovedAsync();
     }
 }

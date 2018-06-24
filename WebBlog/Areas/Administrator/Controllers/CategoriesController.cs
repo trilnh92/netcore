@@ -70,7 +70,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,ParentId,ParentName,Name,Type,Language,Description,Image,Url,HasChildren,HasUrl,Index")] Category category)
         {
             if (ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CategoryId,ParentId,ParentName,Name,Type,Language,Description,Image,Url,HasChildren,HasUrl,Index")] Category category)
         {
             if (id != category.CategoryId)
@@ -163,7 +163,7 @@ namespace WebBlog.Areas.Administrator.Controllers
 
         // POST: Administrator/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);

@@ -43,7 +43,7 @@ namespace WebBlog.Auth
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("WebBlogIdentityDBConnection")));
+               options.UseMySql(Configuration.GetConnectionString("WebBlogIdentityDBConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -71,7 +71,8 @@ namespace WebBlog.Auth
             {
                 // base-address of your identityserver
                 options.Authority = "http://localhost:52960/";
-
+                //options.Authority = Configuration["ServerAuthUrl"].ToString();
+                
                 // name of the API resource
                 options.Audience = "api1";
 
@@ -95,9 +96,9 @@ namespace WebBlog.Auth
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseCors("AllowAllHeaders");

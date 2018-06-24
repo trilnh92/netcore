@@ -25,13 +25,7 @@
                     <tr>
                         <th>
                             Tên danh mục
-                        </th>
-                        <th>
-                            Danh mục cha
-                        </th>
-                        <th>
-                            Có danh mục con
-                        </th>
+                        </th>                       
                         <th>
                             Miêu tả
                         </th>
@@ -44,21 +38,7 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentName)
-                        </td>
-                        <td>
-                            @if (item.HasChildren)
-                            {
-                                <input type="checkbox" checked="checked" disabled="disabled" />
-                            }
-                            else
-                            {
-                                <input type="checkbox" disabled="disabled" />
-                            }
-                        </td>
-
+                        </td>                        
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>

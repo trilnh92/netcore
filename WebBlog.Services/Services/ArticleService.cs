@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WebBlog.Database.Models;
 using WebBlog.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebBlog.Services.Services
 {
@@ -39,12 +41,14 @@ namespace WebBlog.Services.Services
 
         public async Task<IEnumerable<Article>> GetAllVisibleAsync()
         {
-            return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.IsVisible && !x.IsDeleted);
+            //return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.IsVisible && !x.IsDeleted);
+            return await _unitOfWork.ArticleRepository.Query.Where(x => x.IsVisible && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
         public async Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email)
         {
-            return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.CreatedBy == email && !x.IsDeleted);
+            //return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.CreatedBy == email && !x.IsDeleted);
+            return await _unitOfWork.ArticleRepository.Query.Where(x => x.CreatedBy == email && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
         public async Task<Article> GetByIdAsync(int id)

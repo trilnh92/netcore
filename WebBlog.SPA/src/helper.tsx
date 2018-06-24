@@ -117,6 +117,10 @@ export function imageExists(imageUrl: string) {
     }
 }
 
+export function changeBrokenImage(image:any) {
+    image.src = 'images/img_not_available.png';
+}
+
 export function getAnteOrPostMeridiemTime(time: string) {
     if (!time) {
         return '';

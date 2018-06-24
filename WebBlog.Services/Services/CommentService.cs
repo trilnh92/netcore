@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using WebBlog.Database.Models;
 using WebBlog.Services.IServices;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace WebBlog.Services.Services
 {
     public class CommentService : ICommentService
@@ -35,6 +37,11 @@ namespace WebBlog.Services.Services
         public async Task<IEnumerable<Comment>> GetAllAsync()
         {
             return await _unitOfWork.CommentRepository.FindAllAsync(x => !x.IsDeleted);
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllByArticleIdAsync(int articleId)
+        {
+            return await _unitOfWork.CommentRepository.Query.Where(x => x.ArticleId == articleId && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
         public async Task<IEnumerable<Comment>> GetAllRemovedAsync()

@@ -56,7 +56,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CommentId,Type,ParentId,CreatedDate,CreatedBy,IsDeleted,DeletedDate,DeletedBy,UpdatedDate,UpdatedBy,IsApproved,Content,Ext,ArticleId")] Comment comment)
         {
             if (ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CommentId,Type,ParentId,CreatedDate,CreatedBy,IsDeleted,DeletedDate,DeletedBy,UpdatedDate,UpdatedBy,IsApproved,Content,Ext,ArticleId")] Comment comment)
         {
             if (id != comment.CommentId)
@@ -136,7 +136,7 @@ namespace WebBlog.Areas.Administrator.Controllers
 
         // POST: Administrator/Comments/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+     [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var comment = await _commentServicce.GetByIdAsync(id);

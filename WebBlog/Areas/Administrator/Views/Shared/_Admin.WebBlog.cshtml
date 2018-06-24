@@ -1,5 +1,5 @@
 ﻿<ul>
-    <li class="active_home"><a asp-area="Administrator" asp-controller="Board" asp-action="Index"><i class="icon-home"></i>WBlogBoard</a></li>
+    <li class="active_home"><a asp-area="Administrator" asp-controller="Board" asp-action="Index"><i class="icon-home"></i>WebBlogBoard</a></li>
     <li class="active_category rightMenu">
         <span><i class="icon-business-card"></i>Danh mục</span>
         <ul class="ulRightMenu" style="display: none;">
@@ -15,14 +15,6 @@
             <li><a asp-area="Administrator" asp-controller="Articles" asp-action="Recycle"><i class="icol-bin-closed"></i><span class="admin-text-menu article-recycle">Thùng rác</span></a></li>
         </ul>
     </li>
-    <li class="active_product rightMenu">
-        <span><i class="icon-list"></i>Media files</span>
-        <ul class="ulRightMenu" style="display: none;">
-            <li><a asp-area="Administrator" asp-controller="Media" asp-action="Index"><i class="icol-page-white-stack"></i><span class="admin-text-menu product-all">Tất cả media files</span></a></li>
-            <li><a asp-area="Administrator" asp-controller="Media" asp-action="Create"><i class="icol-pencil"></i><span class="admin-text-menu product-insert">Thêm media file</span></a></li>
-            <li><a asp-area="Administrator" asp-controller="Media" asp-action="Recycle"><i class="icol-bin-closed"></i><span class="admin-text-menu product-recycle">Thùng rác</span></a></li>
-        </ul>
-    </li>
     
-    <li class="active_help"><a href="/Admin"><i class="icon-question-sign"></i>Help</a></li>
+    <li class="active_help"><a asp-area="Administrator" asp-controller="Help" asp-action="Index"><i class="icon-question-sign"></i>Help</a></li>
 </ul>

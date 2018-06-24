@@ -45,3 +45,14 @@ export function apiLoginAccount(loginModel:any, callback:any, errorCallback:any)
     var url = BaseUrl.AUTH_URL + '/connect/token';
     fetchLogin(url, loginModel, callback, errorCallback);
 }
+
+/* Comment */
+export function apiGetCommentsByArticleById(articleId:number, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.COMMENT_URL + 'GetCommentsByArticleById/' + articleId;
+    fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
+export function apiCreateComment(comment:any, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.COMMENT_URL;
+    fetchApi(url, 'POST', comment , callback, errorCallback);
+}

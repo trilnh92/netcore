@@ -1,14 +1,14 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 
 import { Layout } from './components/Layout';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Layout />
-    </BrowserRouter>
+    </HashRouter>
     ,
     document.getElementById("WebBlogApplication")
 

@@ -20,3 +20,5 @@
 /WebBlog.Services/obj/*
 /WebBlog.UnitTest/bin/*
 /WebBlog.UnitTest/obj/*
+/WebBlog.SPAPage/obj/*
+/WebBlog.SPAPage/bin/*

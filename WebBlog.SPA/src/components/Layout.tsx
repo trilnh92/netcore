@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, Link } from "react-router-dom"
+import { Route, Link,Switch } from "react-router-dom"
 import { Search } from "./Search";
 import { Category } from "./Category";
 import { Article } from "./Article";
@@ -108,6 +108,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
+                        <Switch>
                             <Route path="/" exact component={MainArticles} />
                             <Route path="/article/:articleId" component={Article} />
                             <Route path="/login"component={() => <Login setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
@@ -115,6 +116,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                             <Route path="/myprofile" component={() => <MyProfile myProfile={this.state.userProfile} />} />
                             <Route path="/myblogs" component={() => <MyBlogs myProfile={this.state.userProfile} />} />
                             <Route path="/createblog" component={() => <CreateBlog userProfile={this.state.userProfile} />} />
+                             </Switch>
                         </div>
 
                         <div className="col-md-4">

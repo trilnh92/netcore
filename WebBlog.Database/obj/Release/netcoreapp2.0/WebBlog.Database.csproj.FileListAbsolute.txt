@@ -1,0 +1,9 @@
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\bin\Release\netcoreapp2.0\WebBlog.Database.deps.json
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\bin\Release\netcoreapp2.0\WebBlog.Database.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\bin\Release\netcoreapp2.0\WebBlog.Database.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.csproj.CoreCompileInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.AssemblyInfoInputs.cache
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.AssemblyInfo.cs
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.dll
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Database\obj\Release\netcoreapp2.0\WebBlog.Database.csprojAssemblyReference.cache

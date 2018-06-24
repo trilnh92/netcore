@@ -14,7 +14,7 @@ namespace WebBlog.Api.Controllers
 {
     [EnableCors("AllowAllHeaders")]
     [Produces("application/json")]
-    [Route("api/Categories")]
+    [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
