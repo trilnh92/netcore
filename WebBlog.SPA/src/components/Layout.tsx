@@ -11,6 +11,7 @@ import { MyBlogs } from "./MyBlogs";
 import { CreateBlog } from "./CreateBlog";
 
 import { UserManager } from 'oidc-client'
+import { BaseUrl } from "../base.url";
 
 interface IAppPros {
 
@@ -62,7 +63,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                     <div className="container">
                         {/* <a className="navbar-brand" href="#">WebBlog</a> */}
-                        <Link className="navbar-brand" to="/">WebBlog</Link>
+                        <Link className="navbar-brand" to={BaseUrl.HOME_URL}>WebBlog</Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -73,13 +74,13 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                                         return (
                                             <ul className="navbar-nav ml-auto">
                                                 <li className="nav-item active">
-                                                    <Link className="nav-link" to="/myblogs">My blogs</Link>
+                                                    <Link className="nav-link" to={BaseUrl.MYBLOGS_URL}>My blogs</Link>
                                                 </li>
                                                 <li className="nav-item active">
-                                                    <Link className="nav-link" to="/createblog">Write blog</Link>
+                                                    <Link className="nav-link" to={BaseUrl.CREATE_BLOG_URL}>Write blog</Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <Link className="nav-link" to="/myprofile">My profile</Link>
+                                                    <Link className="nav-link" to={BaseUrl.MYPROFILE_URL}>My profile</Link>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" href="#" onClick={(e) => this.logOut(e)}>Logout </a>
@@ -91,10 +92,10 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                                             <ul className="navbar-nav ml-auto">
 
                                                 <li className="nav-item">
-                                                    <Link className="nav-link" to="/login">Login</Link>
+                                                    <Link className="nav-link" to={BaseUrl.LOGIN_URL}>Login</Link>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <Link className="nav-link" to="/register">Register</Link>
+                                                    <Link className="nav-link" to={BaseUrl.REGISTER_URL}>Register</Link>
                                                 </li>
                                             </ul>
                                         )
@@ -108,15 +109,13 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                        <Switch>
-                            <Route path="/" exact component={MainArticles} />
-                            <Route path="/article/:articleId" component={Article} />
-                            <Route path="/login"component={() => <Login setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
-                            <Route path="/register" component={() => <Register setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
-                            <Route path="/myprofile" component={() => <MyProfile myProfile={this.state.userProfile} />} />
-                            <Route path="/myblogs" component={() => <MyBlogs myProfile={this.state.userProfile} />} />
-                            <Route path="/createblog" component={() => <CreateBlog userProfile={this.state.userProfile} />} />
-                             </Switch>
+                            <Route path={BaseUrl.HOME_URL} exact component={MainArticles} />
+                            <Route path={BaseUrl.ARTICLE_DETAIL_URL} component={Article} />
+                            <Route path={BaseUrl.LOGIN_URL} component={() => <Login setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
+                            <Route path={BaseUrl.REGISTER_URL} component={() => <Register setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
+                            <Route path={BaseUrl.MYPROFILE_URL} component={() => <MyProfile myProfile={this.state.userProfile} />} />
+                            <Route path={BaseUrl.MYBLOGS_URL} component={() => <MyBlogs myProfile={this.state.userProfile} />} />
+                            <Route path={BaseUrl.CREATE_BLOG_URL} component={() => <CreateBlog userProfile={this.state.userProfile} />} />
                         </div>
 
                         <div className="col-md-4">

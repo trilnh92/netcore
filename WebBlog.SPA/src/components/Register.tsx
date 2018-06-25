@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom'
 import { apiRegisterAccount } from './../apiService';
+import {BaseUrl} from './../base.url'
 
 interface IRegisterProps {
     setUserProfile: any;
@@ -57,7 +58,7 @@ export class Register extends React.Component<IRegisterProps, IRegisterState> {
 
     render() {
         if (this.state.redirectToMyProfile) {
-            return <Redirect to='/myprofile' />;
+            return <Redirect to={BaseUrl.MYPROFILE_URL} />;
         }
 
         return (

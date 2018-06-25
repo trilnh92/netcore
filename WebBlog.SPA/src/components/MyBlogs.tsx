@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { ArticleSummary } from './ArticleSummary';
 import { apiGetArticlesByUser } from '../apiService';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import {BaseUrl} from './../base.url'
 
 interface IMyBlogsProps {
     myProfile:any;
@@ -40,7 +41,7 @@ export class MyBlogs extends React.Component<IMyBlogsProps, IMyBlogsState> {
 
     render() {
         if(this.props.myProfile == undefined || this.props.myProfile.email == undefined){
-            return <Redirect to='/' />;
+            return <Redirect to={BaseUrl.HOME_URL} />;
         }
 
         return (

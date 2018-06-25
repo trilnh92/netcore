@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link, Redirect } from "react-router-dom"
 import { apiLoginAccount } from './../apiService'
 import { parseJwt } from './../helper'
+import { BaseUrl } from '../base.url'
 
 interface ILoginProps {
     setUserProfile: any;
@@ -69,7 +70,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
 
     render() {
         if (this.state.redirectToMyProfile) {
-            return <Redirect to='/myprofile' />;
+            return <Redirect to={BaseUrl.MYPROFILE_URL} />;
         }
         return (
             <div>
@@ -131,7 +132,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
                             <div className="col-md-12 control">
                                 <div >
                                     Don't have an account!
-                                        <Link className="nav-link" to="/register">Sign up here</Link>
+                                        <Link className="nav-link" to={BaseUrl.REGISTER_URL}>Sign up here</Link>
                                 </div>
                             </div>
                         </div>

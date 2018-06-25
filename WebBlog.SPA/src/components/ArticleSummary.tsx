@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {changeBrokenImage } from './../helper'
+import { BaseUrl } from './../base.url'
 
 interface IArticleSummaryProps {
     article:any;
@@ -25,7 +26,7 @@ export class ArticleSummary extends React.Component<IArticleSummaryProps, IArtic
                 <div className="card-body">
                     <h2 className="card-title">{this.state.article.title}</h2>
                     <p className="card-text">{this.state.article.briefContent}</p>
-                    <Link to={"/article/" + this.state.article.articleId}>Read more</Link>
+                    <Link to={BaseUrl.ARTICLE_URL + "/" + this.state.article.articleId}>Read more</Link>
                 </div>
                 <div className="card-footer text-muted">
                     Posted on {this.state.article.createdDate} by

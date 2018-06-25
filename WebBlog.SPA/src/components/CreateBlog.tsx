@@ -3,6 +3,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { apiCreateArticle, apiUploadPhoto, apiGetCategories } from './../apiService'
 import { Redirect } from 'react-router-dom'
 import { CreateArticleViewModel } from './../models/article.model'
+import { BaseUrl } from './../base.url'
 
 export const COUNTRIES = [
 	"Afghanistan",
@@ -195,11 +196,11 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 	render() {
 
 		if (this.props.userProfile == undefined || this.props.userProfile.email == undefined) {
-			return <Redirect to='/' />;
+			return <Redirect to={BaseUrl.HOME_URL} />;
 		}
 
 		if (this.state.redirectToMyBlogs) {
-			return <Redirect to='/myblogs' />;
+			return <Redirect to={BaseUrl.MYBLOGS_URL} />;
 		}
 
 		return (

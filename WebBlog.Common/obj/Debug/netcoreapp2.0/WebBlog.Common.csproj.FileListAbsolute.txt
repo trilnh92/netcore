@@ -15,3 +15,4 @@ C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\W
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.AssemblyInfo.cs
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.dll
 C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.pdb
+C:\WORKSPACE\Source\Git\WebBlog\netcore\WebBlog.Common\obj\Debug\netcoreapp2.0\WebBlog.Common.csprojAssemblyReference.cache

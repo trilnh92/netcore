@@ -5,5 +5,6 @@ export const environment = {
     //  authAPI: 'http://localhost:52960'
 
     serviceAPI: 'https://api-webblog.appspot.com',
-    authAPI: 'https://auth-webblog.appspot.com'
+    authAPI: 'https://auth-webblog.appspot.com',
+    clientURL:''
   };
