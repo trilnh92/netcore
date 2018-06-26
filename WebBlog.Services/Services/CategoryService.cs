@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
 using WebBlog.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebBlog.Services.Services
 {
@@ -23,6 +24,11 @@ namespace WebBlog.Services.Services
             return _unitOfWork.CategoryRepository.FindAll(c => c.Language.Equals(language));
         }
 
+        public IOrderedQueryable<Category> GetAllOrderByName()
+        {
+            return _unitOfWork.CategoryRepository.Query.AsNoTracking().OrderBy(p => p.Name);
+        }
+        
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _unitOfWork.CategoryRepository.FindAllAsync(p=>true);

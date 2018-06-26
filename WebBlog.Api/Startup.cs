@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
 using WebBlog.Services;
@@ -69,6 +70,22 @@ namespace WebBlog.Api
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddMvc();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "WebBlog API",
+                    Description = "ASP.NET Core 2.0 WebBlog API",
+                    TermsOfService = "None",
+                    Contact = new Contact()
+                    {
+                        Name = "Tai Hoang",
+                        Email = "tai.hoangvan@nashtechglobal.com",
+                        Url = "https://sd2169.azurewebsites.net"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,6 +113,11 @@ namespace WebBlog.Api
             app.UseAuthentication();
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebBlog API");
+            });
 
             app.UseCors("AllowAllHeaders");
         }

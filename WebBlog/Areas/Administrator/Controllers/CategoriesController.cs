@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using WebBlog.Common;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
@@ -25,10 +26,11 @@ namespace WebBlog.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string sortExpression = "Name")
         {
-            var result = await _categoryService.GetAllAsync();
-            return View(result);
+            var qry = _categoryService.GetAllOrderByName();
+            var model = await PagingList.CreateAsync(qry, 10, page, sortExpression, "Name");
+            return View(model);
         }
 
         // GET: Administrator/Categories/Details/5

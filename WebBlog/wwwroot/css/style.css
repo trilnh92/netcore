@@ -144,3 +144,7 @@ a:hover{
 .admin-header {
     height: 45px!important;
 }
+
+.paging-admin-nav {
+margin-left:20px;
+}

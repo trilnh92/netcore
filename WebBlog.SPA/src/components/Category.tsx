@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {apiGetCategories} from '../apiService'
+import { apiGetCategories } from '../apiService'
 
 interface ICategoryProps {
 }
@@ -9,28 +9,28 @@ interface ICategoryState {
 }
 
 export class Category extends React.Component<ICategoryProps, ICategoryState> {
-	constructor(props: any) {
-        super(props);
-        this.state = {
-            categories: []
-        }
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      categories: []
     }
+  }
 
-    loadCategories = () => {
-        apiGetCategories((response: any) => {
-            if (response.target.status == 200) {
-                let data = JSON.parse(response.target.responseText);
-                this.setState({ categories: data })
-            }
-        },
-            (errors: any) => {
-                this.setState({ categories: [] });
-            })
-    }
+  loadCategories = () => {
+    apiGetCategories((response: any) => {
+      if (response.target.status == 200) {
+        let data = JSON.parse(response.target.responseText);
+        this.setState({ categories: data })
+      }
+    },
+      (errors: any) => {
+        this.setState({ categories: [] });
+      })
+  }
 
-    componentWillMount() {
-        this.loadCategories();
-    }
+  componentWillMount() {
+    this.loadCategories();
+  }
 
   render() {
     return (

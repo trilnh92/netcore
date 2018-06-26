@@ -21,6 +21,7 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using ReflectionIT.Mvc.Paging;
 
 namespace WebBlog
 {
@@ -99,6 +100,7 @@ namespace WebBlog
             //My temp solution: I setup 1 instance in app.yaml for the deployment ----> WORKED :)
 
             services.AddMvc();
+            services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
