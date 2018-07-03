@@ -47,8 +47,8 @@ namespace WebBlog.Auth
 
                     RedirectUris           = { "https://sd2169.azurewebsites.net/callback" },
                     PostLogoutRedirectUris = { "https://sd2169.azurewebsites.net/" },
-                    //AllowedCorsOrigins = { "https://sd2169.azurewebsites.net" },
-                    AllowedCorsOrigins = { "http://localhost:5000" },
+                    AllowedCorsOrigins = { "https://sd2169.azurewebsites.net" },
+                    //AllowedCorsOrigins = { "http://localhost:5000" },
                     
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ReflectionIT.Mvc.Paging;
 using WebBlog.Common;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
@@ -37,12 +38,13 @@ namespace WebBlog.Areas.Administrator.Controllers
             _configuration = configuration;
         }
 
-        // GET: Administrator/Articles
-        public async Task<IActionResult> Index()
+        // GET: Administrator/Articles    
+        public async Task<IActionResult> Index(int page = 1, string sortExpression = "Title")
         {
-            var result = await _articleService.GetAllAsync();
+            var qry = _articleService.GetAllOrderByTitle();
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeAdmin, page, sortExpression, "Title");
             ViewBag.ClientUrl = _configuration["ClientUIUrl"].ToString();
-            return View(result);
+            return View(model);
         }
 
         // GET: Administrator/Articles/Details/5

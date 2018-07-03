@@ -34,6 +34,11 @@ namespace WebBlog.Services.Services
             await _unitOfWork.CommentRepository.DeleteAsync(comment);
         }
 
+        public IOrderedQueryable<Comment> GetAllOrderByCreatedBy()
+        {
+            return _unitOfWork.CommentRepository.Query.AsNoTracking().Where(x=>!x.IsDeleted).OrderBy(p => p.CreatedBy);
+        }
+
         public async Task<IEnumerable<Comment>> GetAllAsync()
         {
             return await _unitOfWork.CommentRepository.FindAllAsync(x => !x.IsDeleted);

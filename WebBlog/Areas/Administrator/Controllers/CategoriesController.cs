@@ -29,7 +29,7 @@ namespace WebBlog.Areas.Administrator.Controllers
         public async Task<IActionResult> Index(int page = 1, string sortExpression = "Name")
         {
             var qry = _categoryService.GetAllOrderByName();
-            var model = await PagingList.CreateAsync(qry, 10, page, sortExpression, "Name");
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeAdmin, page, sortExpression, "Name");
             return View(model);
         }
 

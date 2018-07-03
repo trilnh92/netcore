@@ -70,8 +70,8 @@ namespace WebBlog.Auth
             .AddJwtBearer(options =>
             {
                 // base-address of your identityserver
-                options.Authority = "http://localhost:52960/";
-                //options.Authority = Configuration["ServerAuthUrl"].ToString();
+                //options.Authority = "http://localhost:52960/";
+                options.Authority = Configuration["ServerAuthUrl"].ToString();
                 
                 // name of the API resource
                 options.Audience = "api1";

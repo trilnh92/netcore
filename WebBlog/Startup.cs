@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace WebBlog
 {
@@ -44,7 +45,7 @@ namespace WebBlog
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();            
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IArticleService, ArticleService>();
@@ -100,6 +101,13 @@ namespace WebBlog
             //My temp solution: I setup 1 instance in app.yaml for the deployment ----> WORKED :)
 
             services.AddMvc();
+            //services.AddMvc()
+            //                .ConfigureApplicationPartManager(manager =>
+            //                {
+            //                    manager.FeatureProviders.Remove(manager.FeatureProviders.First(f => f is MetadataReferenceFeatureProvider));
+            //                    manager.FeatureProviders.Add(new ReferencesMetadataReferenceFeatureProvider());
+            //                });
+
             services.AddPaging();
         }
 

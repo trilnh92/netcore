@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebBlog.Database.Models.Comment>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebBlog.Database.Models.Comment>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,16 +25,16 @@
                 <thead>
                     <tr>
                         <th>
-                            Tác giả
+                            @Html.SortableHeaderFor(model => model.CreatedBy)
                         </th>
                         <th>
-                            Nội dung
+                            @Html.SortableHeaderFor(model => model.Content)
                         </th>
                         <th>
-                            Bài viết
+                            @Html.SortableHeaderFor(model => model.ArticleId)
                         </th>
                         <th>
-                            Ngày bình luận
+                            @Html.SortableHeaderFor(model => model.CreatedDate)
                         </th>
                         <th>
                         </th>
@@ -53,8 +53,8 @@
                             <a href="@ViewBag.ClientUrl/article/@item.ArticleId" target="_blank">@item.ArticleId</a>
                         </td>
                         <td>
-                                @item.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss tt")
-                          
+                            @item.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss tt")
+
                         </td>
                         <td>
                             <span class="btn-group">
@@ -70,7 +70,9 @@
                     </tr>
                 }
             </table>
-
+            <nav aria-label="Categories navigation" class="paging-admin-nav">
+                <vc:pager paging-list="@Model" />
+            </nav>
 
         </div>
     </div>

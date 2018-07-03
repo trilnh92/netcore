@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ReflectionIT.Mvc.Paging;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
 using WebBlog.Services.IServices;
+using WebBlog.Common;
 
 namespace WebBlog.Areas.Administrator.Controllers
 {
@@ -30,10 +32,12 @@ namespace WebBlog.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string sortExpression = "CreatedBy")
         {
+            var qry = _commentServicce.GetAllOrderByCreatedBy();
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeAdmin, page, sortExpression, "CreatedBy");
             ViewBag.ClientUrl = _configuration["ClientUIUrl"].ToString();
-            return View(await _commentServicce.GetAllAsync());
+            return View(model);
         }
 
         // GET: Administrator/Comments/Details/5

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebBlog.Database.Models.Article>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebBlog.Database.Models.Article>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,19 +25,19 @@
                 <thead>
                     <tr>
                         <th>
-                            Tựa đề
-                        </th>                       
-                        <th>
-                            Tác giả
+                            @Html.SortableHeaderFor(model => model.Title)
                         </th>
                         <th>
-                            Được hiển thị bài viết
+                            @Html.SortableHeaderFor(model => model.CreatedBy)
                         </th>
                         <th>
-                            Ngày tạo
+                            @Html.SortableHeaderFor(model => model.IsVisible)
                         </th>
                         <th>
-                            Ngày cập nhật
+                            @Html.SortableHeaderFor(model => model.CreatedDate)
+                        </th>
+                        <th>
+                            @Html.SortableHeaderFor(model => model.UpdatedDate)
                         </th>
                         <th>
                         </th>
@@ -78,8 +78,9 @@
                     </tr>
                 }
             </table>
-
-
+            <nav aria-label="Categories navigation" class="paging-admin-nav">
+                <vc:pager paging-list="@Model" />
+            </nav>
         </div>
     </div>
 </div>

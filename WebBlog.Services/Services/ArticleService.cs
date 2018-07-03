@@ -34,6 +34,11 @@ namespace WebBlog.Services.Services
             await _unitOfWork.ArticleRepository.DeleteAsync(article);
         }
 
+        public IOrderedQueryable<Article> GetAllOrderByTitle()
+        {
+            return _unitOfWork.ArticleRepository.Query.AsNoTracking().Where(x=>!x.IsDeleted).OrderBy(p => p.Title);
+        }
+
         public async Task<IEnumerable<Article>> GetAllAsync()
         {
             return await _unitOfWork.ArticleRepository.FindAllAsync(x => !x.IsDeleted);

@@ -4,26 +4,7 @@ import { apiCreateArticle, apiUploadPhoto, apiGetCategories } from './../apiServ
 import { Redirect } from 'react-router-dom'
 import { CreateArticleViewModel } from './../models/article.model'
 import { BaseUrl } from './../base.url'
-
-export const COUNTRIES = [
-	"Afghanistan",
-	"Albania",
-	"Algeria",
-	"Andorra",
-	"Angola",
-	"Anguilla",
-	"Antigua &amp; Barbuda",
-	"Argentina",
-	"Armenia",
-	"Aruba"
-]
-
-const suggestions = COUNTRIES.map((country) => {
-	return {
-		id: country,
-		text: country
-	}
-})
+import { MyEditor} from './MyEditor'
 
 const KeyCodes = {
 	comma: 188,
@@ -44,6 +25,7 @@ interface ICreateBlogState {
 	file: any;
 	tags: any;
 	suggestions: any,
+	fullContent:string
 }
 
 export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogState>{
@@ -58,11 +40,13 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 			file: undefined,
 			tags: [],
 			suggestions: [],
+			fullContent:''
 		}
 
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleAddition = this.handleAddition.bind(this);
 		this.handleDrag = this.handleDrag.bind(this);
+    	
 	}
 
 	loadCategories = () => {
@@ -86,6 +70,11 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 	componentWillMount() {
 		this.loadCategories();
 	}
+
+	handleEditorChange = (e:any) => {
+		console.log('Content was updated:', e.target.getContent());
+		this.setState({fullContent:e.target.getContent()});
+	  }
 
 	handleImageChange = (event: any) => {
 		event.preventDefault();
@@ -125,7 +114,7 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 				this.state.article.Title = event.target.value;
 				break;
 			case 'fullcontent':
-				this.state.article.FullContent = event.target.value;							
+				this.state.article.FullContent = event.target.value;
 				break;
 		}
 		this.setState({ article: this.state.article });
@@ -138,14 +127,15 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 		var article = this.state.article;
 		article.CreatedBy = this.state.userProfile ? this.state.userProfile.email : '';
 		let tags = '';
-		this.state.tags && this.state.tags.forEach((element:any) => {
-			tags+=(element.id + ',');
+		this.state.tags && this.state.tags.forEach((element: any) => {
+			tags += (element.id + ',');
 		});
 
 		if (tags.length > 1)
-               tags = tags.substring(0, tags.length - 1);
-		
-		article.Tags =tags;
+			tags = tags.substring(0, tags.length - 1);
+
+		article.Tags = tags;
+		article.FullContent = this.state.fullContent;
 
 		apiCreateArticle(article, (response: any) => {
 			if (response.target.status == 200) {
@@ -192,6 +182,8 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 		// re-render
 		this.setState({ tags: newTags });
 	}
+
+	setContent = (content:any) => this.setState({fullContent:content});
 
 	render() {
 
@@ -259,11 +251,9 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 						<div className="form-group">
 							<div className="row">
 								<label className="col-md-3 control-label">Full content</label>
+								
 								<div className="col-md-9">
-									<textarea rows={20}
-										value={this.state.article ? this.state.article.FullContent : ""}
-										onChange={evt => this.handleTextChange(evt, 'fullcontent')}
-										className="form-control" placeholder="Full Content"></textarea>
+									<MyEditor  setContent={(content:any) => this.setContent(content)}/>     
 								</div>
 							</div>
 						</div>

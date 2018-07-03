@@ -25,7 +25,8 @@ export class ArticleSummary extends React.Component<IArticleSummaryProps, IArtic
                 <img className="card-img-top" src={this.state.article.image} alt="Card image cap" onError={(e) => changeBrokenImage(e.target)}/>
                 <div className="card-body">
                     <h2 className="card-title">{this.state.article.title}</h2>
-                    <p className="card-text">{this.state.article.briefContent}</p>
+                    {/* <p className="card-text">{this.state.article.briefContent}</p> */}
+                    <div className="card-text" dangerouslySetInnerHTML={{ __html: this.state.article ? this.state.article.briefContent : '' }} />
                     <Link to={BaseUrl.ARTICLE_URL + "/" + this.state.article.articleId}>Read more</Link>
                 </div>
                 <div className="card-footer text-muted">

@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 module.exports = {
     entry: "./src/index.tsx",
     output: {
@@ -17,16 +18,35 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
+        extensions: [".ts", ".tsx", ".js", ".json"],
+
+        modules: ['node_modules']
     },
 
-    module: {
+    module: {        
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+
+            {
+                test: /\.jsx$/,
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                    cacheDirectory: true,
+                    presets: ['react','es2015', 'stage-2']
+                  }
+                }
+              }, {
+                test: /\.css$/,
+                use: [
+                  'style-loader',
+                  'css-loader'
+                ]
+              }
         ]
     },
 
@@ -38,4 +58,12 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
+
+    plugins: [
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery"
+        })
+      ]
+    
 };

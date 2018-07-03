@@ -9,6 +9,8 @@ namespace WebBlog.Common
         public static readonly string API_URL = "";
         public static readonly string DefaultLanguage = "vi";
         public const double BriefContentCharater = 200;
+        public const int PageSizeAdmin = 10;
+        public const int PageSizeClient = 5;
     }
 
     public class EnumCategoryType
