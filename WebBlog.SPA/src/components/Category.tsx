@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
 import { apiGetCategories } from '../apiService'
+import { BaseUrl } from './../base.url'
 
 interface ICategoryProps {
 }
@@ -37,7 +39,9 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
 		for (var i = 0; i < categories.length; i++) {
 			let name = categories[i].name;
 			rows.push(
-				<li key={i}><a href="#">{name}</a></li>
+				<li key={i}>
+				 <Link to={{pathname: BaseUrl.CATEGORYBLOGS_URL + "/" + name, state: "desiredState"}}>{name}</Link>
+				</li>
 			);
 		}
 		return rows;

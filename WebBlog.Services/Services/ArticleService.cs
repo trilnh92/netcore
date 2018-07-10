@@ -46,14 +46,17 @@ namespace WebBlog.Services.Services
 
         public async Task<IEnumerable<Article>> GetAllVisibleAsync()
         {
-            //return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.IsVisible && !x.IsDeleted);
             return await _unitOfWork.ArticleRepository.Query.Where(x => x.IsVisible && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
         public async Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email)
         {
-            //return await _unitOfWork.ArticleRepository.FindAllAsync(x => x.CreatedBy == email && !x.IsDeleted);
             return await _unitOfWork.ArticleRepository.Query.Where(x => x.CreatedBy == email && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Article>> GetAllByCategoryNameAsync(string category)
+        {
+            return await _unitOfWork.ArticleRepository.Query.Where(x => (x.CategoryArticleName.Contains(category) || x.Ext.Contains(category)) && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
         public async Task<Article> GetByIdAsync(int id)

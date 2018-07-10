@@ -145,6 +145,13 @@ namespace WebBlog.Api.Controllers
             return await _articleService.GetAllByUserEmailAsync(email);
         }
 
+        [HttpGet]
+        [Route("GetArticlesByCategory/{category}")]
+        public async Task<IEnumerable<Article>> GetArticlesByCategory(string category)
+        {            
+            return await _articleService.GetAllByCategoryNameAsync(category);
+        }
+
         // DELETE: api/Articles/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteArticle([FromRoute] int id)

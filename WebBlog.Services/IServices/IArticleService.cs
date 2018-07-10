@@ -17,6 +17,7 @@ namespace WebBlog.Services.IServices
         IOrderedQueryable<Article> GetAllOrderByTitle();
         Task<IEnumerable<Article>> GetAllAsync();
         Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email);
+        Task<IEnumerable<Article>> GetAllByCategoryNameAsync(string category);        
         Task<IEnumerable<Article>> GetAllVisibleAsync();
         Task<IEnumerable<Article>> GetAllRemovedAsync();
     }

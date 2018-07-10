@@ -9,9 +9,10 @@ import { Login } from "./Login";
 import { MyProfile } from "./MyProfile";
 import { MyBlogs } from "./MyBlogs";
 import { CreateBlog } from "./CreateBlog";
-
+import { CategoryBlogs } from "./CategoryBlogs"
 import { UserManager } from 'oidc-client'
 import { BaseUrl } from "../base.url";
+import { guid } from "./../helper"
 
 interface IAppPros {
 
@@ -20,6 +21,7 @@ interface IAppPros {
 interface IAppState {
     userProfile: any;
     userManager:any;
+    categoryName:string,
 }
 
 export class Layout extends React.Component<IAppPros, IAppState> {
@@ -41,7 +43,8 @@ export class Layout extends React.Component<IAppPros, IAppState> {
 
         this.state = {
             userProfile: retrievedUserProfile?JSON.parse(retrievedUserProfile):undefined,
-            userManager: new UserManager(config)
+            userManager: new UserManager(config),
+            categoryName:''
         }
     }
 
@@ -115,6 +118,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                             <Route path={BaseUrl.REGISTER_URL} component={() => <Register setUserProfile={(profile: any) => this.setUserProfile(profile)} />} />
                             <Route path={BaseUrl.MYPROFILE_URL} component={() => <MyProfile myProfile={this.state.userProfile} />} />
                             <Route path={BaseUrl.MYBLOGS_URL} component={() => <MyBlogs myProfile={this.state.userProfile} />} />
+                            <Route path={BaseUrl.CATEGORYBLOGS_DETAIL_URL} render={(props) => <CategoryBlogs {...props} key={guid()}/>} />
                             <Route path={BaseUrl.CREATE_BLOG_URL} component={() => <CreateBlog userProfile={this.state.userProfile} />} />
                         </div>
 

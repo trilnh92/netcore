@@ -14,6 +14,11 @@ export function apiGetArticlesByUser(userModel:any, callback:any, errorCallback:
     fetchApi(url, 'POST', userModel, callback, errorCallback);
 }
 
+export function apiGetArticlesByCategory(category:string, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'GetArticlesByCategory/' + category;
+    fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
 export function apiGetArticleById(articleId: number, callback: any, errorCallback: any) {
     var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + articleId;
     fetchApi(url, 'GET', undefined, callback, errorCallback);
