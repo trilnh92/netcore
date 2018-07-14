@@ -46,9 +46,9 @@ namespace WebBlog.Api
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WebBlogIdentityDBConnection")));
+                options.UseMySql(Configuration.GetConnectionString("WebBlogIdentityDBConnection")));
 
-            services.AddDbContext<WebBlogDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebBlogDBConnection")));
+            services.AddDbContext<WebBlogDbContext>(options => options.UseMySql(Configuration.GetConnectionString("WebBlogDBConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

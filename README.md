@@ -1,26 +1,35 @@
 # netcore
-This is my assignment for ASP.NET Core 2.0 Intensive course internal. 
-
 “Building a simple Blog Engine using ASP.NET Core”.
 
-REQUIREMENTS:
 
-For blog owner:
+The architecture of project was based on the common N-Layers architecture for web development (https://docs.microsoft.com/en-us/dotnet/standard/modern-web-apps-azure-architecture/common-web-application-architectures)
 
-Login/Logout
-Manage categories (Name, Description)
-Manage post (Slug, ShortDescription, Content, ThumbnailImage, CreatedDate, UpdatedDate)
-Manage comments (optional)
+Demo:
+- WebBlog.SPA was deployed to azure site (https://sd2169.azurewebsites.net) (Account: enduser - Pass: User@123) 
+- WebBlog (WebBlog management) was deployed to google cloud platform (https://admin-webblog.appspot.com) (Account: admin.webblog@gmail.com - Pass: Admin@123)
+- WebBlog.Api (Api WebBlog) was also deployed to google cloud platform (https://api-webblog.appspot.com/swagger/index.html)
 
-For internet users:
+Because I deploy to Google Cloud, hence I used MySql provider of entity framework. With the security reasons, I set authorized to access to My SQL instance with trust IP addresses.
+If you want to run Web project (WebBlog, WebBlog.Api, WebBlog.Auth) as your localhost. Please use SQLite provider.
+ 
+To use SQLite provider of entity framework
 
-Home page: lasted posts, categories menu
-View posts by category
-View post details
-Add comments (optional)
+- Remove MySQL package reference <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
 
-The project should apply as much techniques of ASP.NET MVC Core as possible. For example: TagHelpers, ViewComponents, Razor Pages and have Unit Test. The Unit Test don’t need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services, …
-Some people might prefer SPA. They can use any SPA frameworks but only for the back-office (blog owner). The front-office (internet users) must use Razor Views
+- Add SQLite package reference <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
+
+- In Startup.cs change UseSqlServer to UseSqlite
+
+- Update connection string: 
+
+			+ "WebBlogDBConnection": "Data Source=webblog.db"
+			
+			+ "WebBlogIdentityDBConnection": "Data Source=webblogIdentityDB.db"	
+
+			(Database files also was commited in folder ../WebBlog.Database/Data)
+
+- Delete add existing migration and Add the new one for SQLite
+
 
 INSTRUCTIONS:
 
@@ -39,11 +48,11 @@ dotnet ef migrations add InitialModel --context WebBlogDbContext -p ../WebBlog.D
 dotnet ef migrations add InitialIdentityModel --context ApplicationDbContext -p ../WebBlog.Database/WebBlog.Database.csproj -s WebBlog.csproj -o Data/Migrations
 
 4/I built the client SPA with technologies: (React + webpack + typescript). 
-    #Why react? With my opinions. React just a library, it's lighter than Angular framework. React render via DOM vitual tree. Render performance of it, is better than Angular.
-    #Why webpack? With my opinions. Webpack is helpful to bundle javascript and css. It's help performance loading faster. (https://medium.com/the-self-taught-programmer/what-is-webpack-and-why-should-i-care-part-1-introduction-ca4da7d0d8dc)
-    #Why typescript? With my opinions. Typescript support OOP programming (interface, abstract) and type checking. It's useful when we want to apply Dependency Injection pattern.
-
-5/ Open a command promt in the Web SPA folder (~\WebBlog\WebBlog.SPA) and execute the following commands:
-    npm install 
-    npm run-script build
-    npm start
+	
+	Open a command promt in the Web SPA folder (~\WebBlog\WebBlog.SPA) and execute the following commands:
+		
+		npm install 
+		npm run-script build
+		npm start
+	
+	(url: http://localhost:5000)
