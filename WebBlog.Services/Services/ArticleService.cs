@@ -49,14 +49,38 @@ namespace WebBlog.Services.Services
             return await _unitOfWork.ArticleRepository.Query.Where(x => x.IsVisible && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
+        public IOrderedQueryable<Article> GetAllVisibleOrderByCreatedDate()
+        {
+            return _unitOfWork.ArticleRepository.Query.AsNoTracking().Where(x => x.IsVisible && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate);
+        }
+
         public async Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email)
         {
             return await _unitOfWork.ArticleRepository.Query.Where(x => x.CreatedBy == email && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
         }
 
+        public IOrderedQueryable<Article> GetAllByUserEmailOrderByCreatedDate(string email)
+        {
+            return _unitOfWork.ArticleRepository.Query.AsNoTracking().Where(x => x.CreatedBy == email && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate);
+        }
+
         public async Task<IEnumerable<Article>> GetAllByCategoryNameAsync(string category)
         {
             return await _unitOfWork.ArticleRepository.Query.Where(x => (x.CategoryArticleName.Contains(category) || x.Ext.Contains(category)) && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate).ToListAsync();
+        }
+
+        public IOrderedQueryable<Article> GetAllByCategoryNameOrderByCreatedDate(string category)
+        {
+            return _unitOfWork.ArticleRepository.Query.AsNoTracking().Where(x => (x.CategoryArticleName.Contains(category) || x.Ext.Contains(category)) && x.IsDeleted == false).OrderByDescending(y => y.CreatedDate);
+        }
+
+        public IOrderedQueryable<Article> GetAllBySearchOrderByCreatedDate(string search)
+        {
+            return _unitOfWork.ArticleRepository.Query.AsNoTracking().Where(x => (x.Title.Contains(search)
+                                                                                 || x.Ext.Contains(search)
+                                                                                 || x.CategoryArticleName.Contains(search)
+                                                                                 || x.BriefContent.Contains(search)
+                                                                                 || x.CreatedBy.Contains(search)) && x.IsDeleted == false && x.IsVisible).OrderByDescending(y => y.CreatedDate);
         }
 
         public async Task<Article> GetByIdAsync(int id)

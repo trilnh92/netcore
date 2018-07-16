@@ -13,6 +13,7 @@ import { CategoryBlogs } from "./CategoryBlogs"
 import { UserManager } from 'oidc-client'
 import { BaseUrl } from "../base.url";
 import { guid } from "./../helper"
+import { SearchBlogs } from "./SearchBlogs";
 
 interface IAppPros {
 
@@ -119,6 +120,7 @@ export class Layout extends React.Component<IAppPros, IAppState> {
                             <Route path={BaseUrl.MYPROFILE_URL} component={() => <MyProfile myProfile={this.state.userProfile} />} />
                             <Route path={BaseUrl.MYBLOGS_URL} component={() => <MyBlogs myProfile={this.state.userProfile} />} />
                             <Route path={BaseUrl.CATEGORYBLOGS_DETAIL_URL} render={(props) => <CategoryBlogs {...props} key={guid()}/>} />
+                            <Route path={BaseUrl.SEARCHBLOGS_DETAIL_URL} render={(props) => <SearchBlogs {...props} key={guid()}/>} />
                             <Route path={BaseUrl.CREATE_BLOG_URL} component={() => <CreateBlog userProfile={this.state.userProfile} />} />
                         </div>
 

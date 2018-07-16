@@ -40,7 +40,7 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
 			let name = categories[i].name;
 			rows.push(
 				<li key={i}>
-				 <Link to={{pathname: BaseUrl.CATEGORYBLOGS_URL + "/" + name, state: "desiredState"}}>{name}</Link>
+				 <Link to={{pathname: BaseUrl.CATEGORYBLOGS_URL + "/" + name, state: "desiredState"}}>#{name}</Link>
 				</li>
 			);
 		}

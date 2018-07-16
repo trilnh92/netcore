@@ -71,11 +71,6 @@ export class CreateBlog extends React.Component<ICreateBlogProps, ICreateBlogSta
 		this.loadCategories();
 	}
 
-	handleEditorChange = (e:any) => {
-		console.log('Content was updated:', e.target.getContent());
-		this.setState({fullContent:e.target.getContent()});
-	  }
-
 	handleImageChange = (event: any) => {
 		event.preventDefault();
 		let reader = new FileReader();

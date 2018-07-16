@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ReflectionIT.Mvc.Paging;
+using WebBlog.Common;
 using WebBlog.Database.Data;
 using WebBlog.Database.Models;
 using WebBlog.Database.Models.UserViewModels;
@@ -36,6 +38,15 @@ namespace WebBlog.Api.Controllers
         public async Task<IEnumerable<Article>> Index()
         {
             return await _articleService.GetAllVisibleAsync();
+        }
+
+        [HttpGet]
+        [Route("GetArticlesPaging/{page}")]
+        public async Task<PagingList<Article>> GetArticlesPaging(int page = 1, string sortExpression = "CreatedDate")
+        {
+            var qry = _articleService.GetAllVisibleOrderByCreatedDate();
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeClient, page, sortExpression, "CreatedDate");
+            return model;
         }
 
         // GET: api/Articles/5
@@ -150,6 +161,34 @@ namespace WebBlog.Api.Controllers
         public async Task<IEnumerable<Article>> GetArticlesByCategory(string category)
         {            
             return await _articleService.GetAllByCategoryNameAsync(category);
+        }
+
+        [HttpPost]
+        [Route("GetArticlesByUser/{page}")]
+        public async Task<IEnumerable<Article>> GetArticlesByUser([FromBody] UserViewModel user, int page = 1, string sortExpression = "CreatedDate")
+        {
+            var email = user.Email;
+            var qry = _articleService.GetAllByUserEmailOrderByCreatedDate(email);
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeClient, page, sortExpression, "CreatedDate");
+            return model;
+        }
+
+        [HttpGet]
+        [Route("GetArticlesByCategory/{category}/{page}")]
+        public async Task<IEnumerable<Article>> GetArticlesByCategory(string category, int page=1, string sortExpression = "CreatedDate")
+        {
+            var qry = _articleService.GetAllByCategoryNameOrderByCreatedDate(category);
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeClient, page, sortExpression, "CreatedDate");
+            return model;
+        }
+
+        [HttpGet]
+        [Route("SearchArticles/{search}/{page}")]
+        public async Task<IEnumerable<Article>> SearchArticles(string search, int page = 1, string sortExpression = "CreatedDate")
+        {
+            var qry = _articleService.GetAllBySearchOrderByCreatedDate(search);
+            var model = await PagingList.CreateAsync(qry, Constants.PageSizeClient, page, sortExpression, "CreatedDate");
+            return model;
         }
 
         // DELETE: api/Articles/5

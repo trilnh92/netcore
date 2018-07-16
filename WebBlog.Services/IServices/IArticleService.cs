@@ -15,6 +15,10 @@ namespace WebBlog.Services.IServices
         Task UpdateAsync(Article article);
         Task DeleteAsync(Article article);
         IOrderedQueryable<Article> GetAllOrderByTitle();
+        IOrderedQueryable<Article> GetAllVisibleOrderByCreatedDate();
+        IOrderedQueryable<Article> GetAllByCategoryNameOrderByCreatedDate(string category);
+        IOrderedQueryable<Article> GetAllBySearchOrderByCreatedDate(string search);
+        IOrderedQueryable<Article> GetAllByUserEmailOrderByCreatedDate(string email);
         Task<IEnumerable<Article>> GetAllAsync();
         Task<IEnumerable<Article>> GetAllByUserEmailAsync(string email);
         Task<IEnumerable<Article>> GetAllByCategoryNameAsync(string category);        

@@ -10,7 +10,9 @@ export class BaseUrl {
     public static get MYPROFILE_URL(): string {return environment.clientURL + '/myprofile';}
     public static get MYBLOGS_URL(): string {return environment.clientURL + '/myblogs';}
     public static get CATEGORYBLOGS_URL(): string {return environment.clientURL + '/categoryblogs';}
-    public static get CATEGORYBLOGS_DETAIL_URL(): string {return environment.clientURL + '/categoryblogs/:category';}
+    public static get CATEGORYBLOGS_DETAIL_URL(): string {return environment.clientURL + '/categoryblogs/:category';}   
+    public static get SEARCHBLOGS_URL(): string {return environment.clientURL + '/searchblogs';}
+    public static get SEARCHBLOGS_DETAIL_URL(): string {return environment.clientURL + '/searchblogs/:search';}
     public static get CREATE_BLOG_URL(): string {return environment.clientURL + '/createblog';}    
     public static get ARTICLE_URL():string {return environment.clientURL +'/article'}
 }

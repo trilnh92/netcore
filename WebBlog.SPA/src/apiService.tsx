@@ -19,6 +19,26 @@ export function apiGetArticlesByCategory(category:string, callback:any, errorCal
     fetchApi(url, 'GET', undefined, callback, errorCallback);
 }
 
+export function apiGetArticlesByUserPaging(page:number, userModel:any, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'GetArticlesByUser/' + page;
+    fetchApi(url, 'POST', userModel, callback, errorCallback);
+}
+
+export function apiGetArticlesByCategoryPaging(category:string, page:number, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'GetArticlesByCategory/' + category + '/' + page;
+    fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
+export function apiSearchArticlesPaging(search:string, page:number, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'SearchArticles/' + search + '/' + page;
+    fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
+export function apiGetArticlesPaging(page:number, callback:any, errorCallback:any){
+    var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + 'GetArticlesPaging/' + page;
+    fetchApi(url, 'GET', undefined, callback, errorCallback);
+}
+
 export function apiGetArticleById(articleId: number, callback: any, errorCallback: any) {
     var url = BaseUrl.BASE_URL + ServiceUrl.ARTICLE_URL + articleId;
     fetchApi(url, 'GET', undefined, callback, errorCallback);
