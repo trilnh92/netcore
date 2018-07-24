@@ -69,7 +69,7 @@ export class Article extends React.Component<RouteComponentProps<any>, IArticleS
 			if (response.target.status == 200) {
 				let data = JSON.parse(response.target.responseText);
 				if (data.success) {
-					this.setState({commentText:''});
+					this.setState({ commentText: '' });
 					this.loadComments(this.state.article.articleId);
 				}
 			}
@@ -151,7 +151,7 @@ export class Article extends React.Component<RouteComponentProps<any>, IArticleS
 					})
 				}
 
-        {/* <div className="media mb-4">
+				{/* <div className="media mb-4">
 					<img className="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="" />
 					<div className="media-body">
 						<h5 className="mt-0">Commenter Name</h5>

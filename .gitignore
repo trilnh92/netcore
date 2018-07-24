@@ -22,3 +22,5 @@
 /WebBlog.UnitTest/obj/*
 /WebBlog.SPAPage/obj/*
 /WebBlog.SPAPage/bin/*
+/WebBlog.SPAV2/node_modules/*
+/WebBlog.SPAV2/dist/*
